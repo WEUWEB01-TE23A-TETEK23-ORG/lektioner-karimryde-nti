@@ -1,0 +1,15 @@
+body {
+    background: #e8eab2;
+    background-image: url(./bilder/aziz-acharki-tLsOA0Vlvwk-unsplash.jpg);
+    background-size: cover;
+}
+h1 {
+    color: rgb(31, 226, 164);
+    font-size:100px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+p {
+    color: rgb(255, 139, 178);
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
