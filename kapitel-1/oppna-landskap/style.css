@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Niconne&display=swap');
+body {
+    background-image: url(./bilder/bakgrund.jpg);
+    padding: 50px;
+}
+h1 {
+    color: #FFF;
+    font-family: "Irish Grover", system-ui;
+    font-size: 50px;
+    text-shadow: 5px 5px 5px #111;
+}
+p {
+    font-family: "Niconne", cursive;
+    font-size: 20px;
+    color: #FFF;
+    background-color: #54618699;
+    width: 550px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #111;
+}
+a {
+    color: #FFF;
+}
