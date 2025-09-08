@@ -1,0 +1,36 @@
+body {
+    background-image: url(./bilder/mohamed-saushan-hZ6tMbkAIMk-unsplash.jpg);
+    background-size: cover;
+    background-position: 0 -100px;
+}
+h1 {
+    font-family: sans-serif;
+    font-size: 70px;
+    color: #42a4ff;
+    text-shadow: 3px 3px 1px plum;
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+h2 {
+    font-family: sans-serif;
+    font-size: 40px;
+    color: #42a4ff;
+    text-shadow: 3px 3px 1px plum;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+p {
+    font-family: sans-serif;
+    font-size: 25px;
+    margin-top: 200px;
+    margin-left: 500px;
+}
+a {
+    background-color: plum;
+    color: #FFF;
+    text-decoration: none;
+    padding: 10px 50px 10px 50px;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+}
