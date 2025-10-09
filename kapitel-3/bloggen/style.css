@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --buff: #cb997eff;
+    --desert-sand: #ddbea9ff;
+    --champagne-pink: #ffe8d6ff;
+    --ash-gray: #b7b7a4ff;
+    --sage: #a5a58dff;
+    --reseda-green: #6b705cff;
+}
+
+body {
+    background-color: #000;
+}
+div.kontainer {
+    background-color: var(--reseda-green);
+    width: 800px;
+    padding: 50px;
+    margin: auto;
+    font-family: "Roboto", sans-serif;
+}
+h1 {
+    font-family: "BBH Sans Bogle", sans-serif;
+    font-size: 80px;
+    color: var(--champagne-pink);
+    margin-bottom: 30px;
+}
+div.inlagg {
+    background-color: var(--ash-gray);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+img {
+    width: 500px;
+    border: 20px solid #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+h2 {
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+p.datum {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+p.text {
+    margin-bottom: 20px;
+}
