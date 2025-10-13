@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+    /* CSS HEX */
+    --cordovan: #952F3Cff;
+    --eerie-black: #171814ff;
+    --french-gray: #C8C8CCff;
+    --davys-gray: #5D5C5Cff;
+    --dim-gray: #747474ff;
+}
+
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--eerie-black);
+}
+.kontainer {
+    width: 700px;
+    padding: 30px;
+    margin: auto;
+    font-family: "Noto Sans", sans-serif;
+    color: var(--french-gray);
+}
+h1 {
+    font-family: "Audiowide", sans-serif;
+    margin-bottom: 30px;
+}
+p.intro {
+    margin-bottom: 30px;
+}
+.box {
+    display: flex;
+    padding: 30px;
+    background-color: var(--davys-gray);
+    margin-bottom: 30px;
+}
+img {
+    width: 50%;
+    margin-right: 20px;
+}
+p.bildtext {}
