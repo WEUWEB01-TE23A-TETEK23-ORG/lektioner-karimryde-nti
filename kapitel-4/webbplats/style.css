@@ -20,3 +20,61 @@ body, h1, h2, h3, h4, h5, h6, p, ul {
     --sandy-brown: #f4a261ff;
     --burnt-sienna: #e76f51ff;
 }
+
+body {
+    background-color: var(--charcoal);
+}
+.kontainer {
+    background-color: #fff;
+    width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+.kontainer h1 {
+    font-family: "Chicle", serif;
+    font-size: 80px;
+    color: var(--burnt-sienna);
+    margin-bottom: 40px;
+    text-align: center;
+}
+.kontainer .meny {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.kontainer .meny a {
+    text-decoration: none;
+    background-color: var(--sandy-brown);
+    padding: 10px;
+    width: 125px;
+    display: inline-block;
+    color: var(--charcoal);
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Comfortaa", sans-serif;
+}
+.kontainer .meny a:hover {
+    background-color: var(--burnt-sienna);
+}
+.kontainer .meny a.aktiv {
+    background-color: var(--burnt-sienna);
+}
+.kontainer figure {
+    border: 1px solid;
+    width: 50%;
+    margin: auto;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.kontainer figure img {
+    width: 100%;
+}
+.kontainer figure figcaption {
+
+}
+.kontainer p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.kontainer p a {
+
+}
