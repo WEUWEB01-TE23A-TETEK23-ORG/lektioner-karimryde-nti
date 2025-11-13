@@ -39,6 +39,8 @@ body {
 .kontainer .kolumner-3 .kolumn {
     border-radius: 20px;
     background-color: #fff;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
 }
 .kontainer .kolumner-3 .kolumn:hover {
     box-shadow: 0 10px 10px #999;
