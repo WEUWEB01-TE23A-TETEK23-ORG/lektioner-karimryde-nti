@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
 /* Enkel CSS-reset */
 html {
     box-sizing: border-box;
@@ -17,3 +19,45 @@ Ljusbeige: #FBF7F1
 Beige: #F5EBDC
 Röd: #CC2200
 */
+
+/* Sidans utseende */
+body {
+    background: #FBF7F1;
+}
+.kontainer {
+    width: 1200px;
+    margin: auto;
+    padding: 40px;
+    font-family: "Chewy", system-ui;
+    color: #502314;
+}
+
+/* Sidhuvudets utseende */
+.kontainer .meny {}
+.kontainer .meny img {
+    width: 70px;
+}
+.kontainer .meny a {
+    color: #502314;
+    text-decoration: none;
+}
+
+/* Separatorns utseende */
+.kontainer .separator {
+    background-color: #FF8732;
+}
+.kontainer .separator h1 {}
+
+/* Rutnätet med hamburgare osv.. */
+.kontainer .innehall {}
+.kontainer .innehall h2 {}
+.kontainer .innehall .rutnat {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+.kontainer .innehall .rutnat .box {}
+.kontainer .innehall .rutnat .box img {
+    width: 100%;
+}
+.kontainer .innehall .rutnat .box p {}
