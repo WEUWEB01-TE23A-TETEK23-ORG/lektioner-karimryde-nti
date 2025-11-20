@@ -12,52 +12,80 @@ body, h1, h2, h3, h4, h5, h6, p, ul {
     padding: 0;
 }
 
-/* 
-Orange: #FF8732
-Brun: #502314
-Ljusbeige: #FBF7F1
-Beige: #F5EBDC
-Röd: #CC2200
-*/
+:root {
+    --Orange: #FF8732;
+    --Brun: #502314;
+    --Ljusbeige: #FBF7F1;
+    --Beige: #F5EBDC;
+    --Röd: #CC2200;
+}
 
 /* Sidans utseende */
 body {
-    background: #FBF7F1;
+    background: var(--Ljusbeige)
 }
 .kontainer {
     width: 1200px;
     margin: auto;
     padding: 40px;
     font-family: "Chewy", system-ui;
-    color: #502314;
+    color: var(--Brun);
 }
 
 /* Sidhuvudets utseende */
-.kontainer .meny {}
+.kontainer .meny {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
 .kontainer .meny img {
     width: 70px;
 }
 .kontainer .meny a {
-    color: #502314;
+    color: var(--Brun);
     text-decoration: none;
+    margin-top: 20px;
+}
+.kontainer .meny a.hitta {
+    background-color: var(--Röd);
+    color: var(--Ljusbeige);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 0;
+    margin-left: 80px;
+    height: 50px;
 }
 
 /* Separatorns utseende */
 .kontainer .separator {
-    background-color: #FF8732;
+    background-color: var(--Orange);
+    padding: 30px;
+    margin-bottom: 30px;
 }
-.kontainer .separator h1 {}
+.kontainer .separator h1 {
+    color: var(--Ljusbeige);
+}
 
 /* Rutnätet med hamburgare osv.. */
 .kontainer .innehall {}
-.kontainer .innehall h2 {}
+.kontainer .innehall h2 {
+    font-size: 50px;
+    margin-bottom: 30px;
+}
 .kontainer .innehall .rutnat {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
 }
-.kontainer .innehall .rutnat .box {}
+.kontainer .innehall .rutnat .box {
+    background-color: var(--Beige);
+    border-radius: 20px;
+    text-align: center;
+    padding: 30px;
+}
 .kontainer .innehall .rutnat .box img {
     width: 100%;
 }
-.kontainer .innehall .rutnat .box p {}
+.kontainer .innehall .rutnat .box p {
+    font-size: 25px;
+}
