@@ -78,10 +78,16 @@ body {
     gap: 30px;
 }
 .kontainer .innehall .rutnat .box {
-    background-color: var(--Beige);
+    background: linear-gradient(to bottom, var(--Beige) 50%, transparent 50%);
+    background-position: 0% 60%;
+    background-size: 100% 200%;
     border-radius: 20px;
     text-align: center;
     padding: 30px;
+    transition: background-position 0.5s;
+}
+.kontainer .innehall .rutnat .box:hover {
+    background-position: 0 0;
 }
 .kontainer .innehall .rutnat .box img {
     width: 100%;
