@@ -1,0 +1,67 @@
+﻿# Lektion: visitkort
+
+**Datum:** 2025-09-29
+
+**Sammanfattning:** Tränat på div-box, css-reset och css-arv
+
+## Kod
+
+### index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitkort</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+        <h1>Karim Ryde</h1>
+        <h2>Webblärare</h2>
+        <p>Gatan 35,<br>
+           17657 Bromma</p>
+    </div>
+</body>
+</html>
+```
+
+### style.css
+```css
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Fugaz+One&display=swap');
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #BBB;
+}
+div {
+    background-image: url(./bilder/cristian-palmer-XexawgzYOBc-unsplash.jpg);
+    width: 500px;
+    height: 300px;
+    padding-left: 200px;
+    padding-top: 100px;
+    margin: auto;
+    margin-top: 150px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px #000;
+    color: #fff;
+    font-family: "Audiowide", sans-serif;
+}
+h1 {
+    font-family: "Fugaz One", sans-serif;
+    font-size: 50px;
+}
+```
+
+
