@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Lobster&display=swap');
+
 /* Enkel CSS-reset */
 html {
     box-sizing: border-box;
@@ -12,3 +14,74 @@ body, h1, h2, h3, h4, h5, h6, p, ul {
 img {
     width: 100%;
 }
+
+/* Sidan */
+body {
+    background-image: url("./bilder/justin-clark-H7JiEU8Slnw-unsplash.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+.kontainer {
+    font-family: "Arvo", serif;
+    width: 1000px;
+    margin: auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 30px;
+    grid-template-areas: 
+    "sidhuvud sidhuvud"
+    "innehåll sidebar"
+    "sidfot sidfot";
+}
+
+/* Sidhuvudet & menyn */
+header {
+    grid-area: sidhuvud;
+}
+header h1 {
+    font-family: "Lobster", sans-serif;
+    font-size: 60px;
+}
+header nav {}
+header nav a {}
+header nav a:hover {}
+header nav a.aktiv {}
+
+/* Innehållet på sidan */
+main {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    grid-area: innehåll;
+}
+main article {}
+main article h2 {}
+main article figure {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #AAA;
+}
+main article figure img {}
+main article figure figcaption {}
+main article figure p {}
+
+/* Sidebar */
+aside {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    grid-area: sidebar;
+}
+aside h3 {}
+aside p {}
+aside p a {}
+
+/* Sidfoten */
+footer {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    grid-area: sidfot;
+}
+footer p {}
