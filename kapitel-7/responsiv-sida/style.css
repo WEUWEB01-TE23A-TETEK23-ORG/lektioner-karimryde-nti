@@ -1,0 +1,55 @@
+/* Enkel CSS-reset */
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul {
+    margin: 0;
+    padding: 0;
+}
+img {
+    width: 100%;
+}
+
+body {}
+.kontainer {
+    width: 1200px;
+    padding: 20px;
+    margin: auto;
+}
+header, main, aside, footer {
+    background: #cce272;
+    border: 3px solid #b2c663;
+    padding: 20px;
+    border-radius: 10px;
+}
+header h1 {
+    font-size: 5em;
+}
+header nav {}
+header nav a {
+    font-size: 1.1em;
+    text-decoration: none;
+    background: #a78db3;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+}
+
+main h2 {}
+main img {
+    width: 50%;
+    border: 20px solid #fff;
+}
+main p {}
+
+aside h3 {}
+aside p {}
+aside p a {}
+
+footer p {}
