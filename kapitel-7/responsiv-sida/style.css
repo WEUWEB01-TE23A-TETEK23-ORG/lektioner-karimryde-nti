@@ -18,7 +18,19 @@ body {}
     width: 1200px;
     padding: 20px;
     margin: auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+    grid-template-areas: 
+    "sidhuvud sidhuvud"
+    "innehåll sidopanel"
+    "sidfot sidfot";
 }
+header { grid-area: sidhuvud; } 
+main { grid-area: innehåll; }
+aside { grid-area: sidopanel; }
+footer { grid-area: sidfot; }
+
 header, main, aside, footer {
     background: #cce272;
     border: 3px solid #b2c663;
@@ -53,3 +65,34 @@ aside p {}
 aside p a {}
 
 footer p {}
+
+/* Om skärmen/fönstret är mindre än 1200px */
+@media (max-width: 1200px) {
+    .kontainer {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .kontainer {
+        grid-template-columns: auto;
+        grid-template-areas: 
+        "sidhuvud"
+        "innehåll"
+        "sidopanel"
+        "sidfot ";
+    }
+}
+
+/* Om mindre än 576px */
+@media (max-width: 576px) {
+    header h1 {
+        font-size: 3em;
+        text-align: center;
+    }
+    header nav a {
+        display: block;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+}
