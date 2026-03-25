@@ -29,17 +29,17 @@ Börja med att skapa tre filer: `index.html`, `style.css` och `script.js`. Kopie
 </head>
 <body>
     <div class="container">
-        <h1 id="huvudrubrik">Design-kontrollrummet</h1>
-        <p id="info-text">Här styr vi webbsidans utseende med kod.</p>
+        <h1 class="huvudrubrik">Design-kontrollrummet</h1>
+        <p class="info-text">Här styr vi webbsidans utseende med kod.</p>
         
         <div class="knapp-panel">
-            <button id="btn-bakgrund" onclick="andraBakgrund()">Ändra bakgrund</button>
-            <button id="btn-rubrik" onclick="andraRubrik()">Ändra rubrik</button>
-            <button id="btn-gom" onclick="gomText()">Göm texten</button>
-            <button id="btn-visa" onclick="visaText()">Visa texten</button>
+            <button class="btn-bakgrund" onclick="andraBakgrund()">Ändra bakgrund</button>
+            <button class="btn-rubrik" onclick="andraRubrik()">Ändra rubrik</button>
+            <button class="btn-gom" onclick="gomText()">Göm texten</button>
+            <button class="btn-visa" onclick="visaText()">Visa texten</button>
             </div>
 
-        <div id="hemlig-lada" style="display: none;">
+        <div class="hemlig-lada" style="display: none;">
             <h2>Du hittade den hemliga lådan! 🎁</h2>
             <p>Denna var osynlig från början.</p>
         </div>
@@ -125,7 +125,7 @@ Vill du ändra en rubrik eller en paragraf? Då letar du först upp den med `que
 ```javascript
 // Funktionen kopplad till knappen "Ändra rubrik"
 function andraRubrik() {
-    let minRubrik = document.querySelector("#huvudrubrik");
+    let minRubrik = document.querySelector(".huvudrubrik");
     minRubrik.style.color = "red";
     minRubrik.style.fontSize = "40px";
 }
@@ -138,7 +138,7 @@ I CSS kan man använda `display: none` för att ett element inte ska ta någon p
 ```javascript
 // Funktionen kopplad till knappen "Göm texten"
 function gomText() {
-    let infoText = document.querySelector("#info-text");
+    let infoText = document.querySelector(".info-text");
     infoText.style.display = "none"; // Gömmer texten helt
 }
 ```
@@ -161,7 +161,7 @@ Skapa en knapp som gör texten i paragrafen `#info-text` blå (`"blue"`) när ma
 I startkoden finns en knapp med attributet `onclick="visaText()"`. Skriv JavaScript-funktionen `visaText()` som gör att paragrafen `#info-text` syns igen när man klickar på knappen. (Tips: Sätt `display` till `"block"`).
 
 **Uppgift 4: framkalla den hemliga lådan**
-Det finns en div i din HTML som heter `#hemlig-lada`. Den har `display: none` från början. Skapa en knapp och en funktion som ändrar lådans display till `"block"` så att den poppar fram!
+Det finns en div i din HTML som heter `.hemlig-lada`. Den har `display: none` från början. Skapa en knapp och en funktion som ändrar lådans display till `"block"` så att den poppar fram!
 
 ### Nivå 3: mer styling (medel)
 

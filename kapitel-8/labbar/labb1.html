@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design-kontrollrummet</title>
+    <link rel="stylesheet" href="labb1.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="huvudrubrik">Design-kontrollrummet</h1>
+        <p class="info-text">Här styr vi webbsidans utseende med kod.</p>
+        
+        <div class="knapp-panel">
+            <button class="btn-bakgrund" onclick="andraBakgrund()">Ändra bakgrund</button>
+            <button class="btn-rubrik" onclick="andraRubrik()">Ändra rubrik</button>
+            <button class="btn-gom" onclick="gomText()">Göm texten</button>
+            <button class="btn-visa" onclick="visaText()">Visa texten</button>
+            </div>
+
+        <div class="hemlig-lada" style="display: none;">
+            <h2>Du hittade den hemliga lådan! 🎁</h2>
+            <p>Denna var osynlig från början.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

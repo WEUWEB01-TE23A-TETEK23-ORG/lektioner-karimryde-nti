@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anslagstavlan</title>
+    <link rel="stylesheet" href="labb2.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="huvudrubrik">Dagens meddelande</h1>
+        
+        <div class="meddelande-ruta">
+            <p class="info-text">Klicka på knapparna nedan för att ändra denna text!</p>
+        </div>
+        
+        <div class="knapp-panel">
+            <button class="btn-glad" onclick="gorGlad()">Gör mig glad</button>
+            <button class="btn-arg" onclick="gorArg()">Gör mig arg</button>
+            <button class="btn-hemlig" onclick="visaHemlighet()">Visa hemlighet</button>
+            </div>
+
+        <div class="hemlig-lada" style="display: none;">
+            <p class="hemlig-text">Detta är en hemlig text som ingen får se.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

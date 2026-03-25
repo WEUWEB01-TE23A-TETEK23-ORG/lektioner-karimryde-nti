@@ -28,20 +28,20 @@ Skapa tre nya filer: `index.html`, `style.css` och `script.js`. Kopiera in koden
 </head>
 <body>
     <div class="container">
-        <h1 id="huvudrubrik">Dagens meddelande</h1>
+        <h1 class="huvudrubrik">Dagens meddelande</h1>
         
         <div class="meddelande-ruta">
-            <p id="info-text">Klicka på knapparna nedan för att ändra denna text!</p>
+            <p class="info-text">Klicka på knapparna nedan för att ändra denna text!</p>
         </div>
         
         <div class="knapp-panel">
-            <button id="btn-glad" onclick="gorGlad()">Gör mig glad</button>
-            <button id="btn-arg" onclick="gorArg()">Gör mig arg</button>
-            <button id="btn-hemlig" onclick="visaHemlighet()">Visa hemlighet</button>
+            <button class="btn-glad" onclick="gorGlad()">Gör mig glad</button>
+            <button class="btn-arg" onclick="gorArg()">Gör mig arg</button>
+            <button class="btn-hemlig" onclick="visaHemlighet()">Visa hemlighet</button>
             </div>
 
-        <div id="hemlig-lada" style="display: none;">
-            <p id="hemlig-text">Detta är en hemlig text som ingen får se.</p>
+        <div class="hemlig-lada" style="display: none;">
+            <p class="hemlig-text">Detta är en hemlig text som ingen får se.</p>
         </div>
     </div>
 
@@ -130,7 +130,7 @@ För att byta ut texten inuti ett HTML-element (till exempel en `<p>` eller en `
 // Denna funktion körs när man klickar på "Gör mig glad"-knappen
 function gorGlad() {
     // 1. Hämta stycket där texten står
-    let minText = document.querySelector("#info-text");
+    let minText = document.querySelector(".info-text");
     
     // 2. Ändra textinnehållet!
     minText.textContent = "Idag är en helt fantastisk dag! ☀️";
@@ -143,7 +143,7 @@ Ofta vill vi att en händelse ska göra flera saker samtidigt. Kanske både byta
 
 ```javascript
 function gorArg() {
-    let minText = document.querySelector("#info-text");
+    let minText = document.querySelector(".info-text");
     
     // Ändra texten
     minText.textContent = "NÄ NU BLIR JAG RIKTIGT ARG! 😡";
@@ -162,21 +162,21 @@ Nu är det din tur. Skriv funktionerna i `script.js`. Om du behöver lägga till
 
 **Uppgift 1: förändra rubriken**
 Skapa en ny knapp i HTML med texten "Byt rubrik" och attributet `onclick="bytRubrik()"`. 
-I JavaScript: Skapa funktionen `bytRubrik()` och ändra texten i `#huvudrubrik` till `"Viktigt meddelande!"`.
+I JavaScript: Skapa funktionen `bytRubrik()` och ändra texten i `.huvudrubrik` till `"Viktigt meddelande!"`.
 
 **Uppgift 2: trolla fram hemligheten**
-Det finns en knapp med `onclick="visaHemlighet()"` och en låda med id `hemlig-lada` (som är dold med `display: none;`). 
+Det finns en knapp med `onclick="visaHemlighet()"` och en låda med class `hemlig-lada` (som är dold med `display: none;`). 
 Skriv funktionen som gör att lådans display ändras till `"block"` så texten syns.
 
 ### Nivå 2: interaktivitet och stil
 
 **Uppgift 3: ändra knappens egen text**
-I samma funktion som du skapade i Uppgift 2 (`visaHemlighet()`), gör så att texten på *själva knappen* ändras. Hämta knappen med `querySelector` och ändra dess `textContent` från "Visa hemlighet" till "Hemlighet visad!".
+I samma funktion som du skapade i Uppgift 2 (`visaHemlighet()`), gör så att texten på *själva knappen* ändras. Hämta knappen med `querySelector(".btn-hemlig")` och ändra dess `textContent` från "Visa hemlighet" till "Hemlighet visad!".
 
 **Uppgift 4: varningstext**
 Skapa en knapp i HTML och koppla den till en ny funktion. När funktionen körs ska:
 
-1. Texten i `#info-text` ändras till `"VARNING! Något gick fel!"`.
+1. Texten i `.info-text` ändras till `"VARNING! Något gick fel!"`.
 2. Hela sidans bakgrundsfärg (`document.body.style.backgroundColor`) ska bli orange (`"orange"`).
 
 ### Nivå 3: användarens egna ord
@@ -185,17 +185,14 @@ Skapa en knapp i HTML och koppla den till en ny funktion. När funktionen körs 
 Skapa en knapp som heter "Skriv en hälsning" och en tillhörande funktion.
 I funktionen ska du använda `prompt("Skriv en hälsning här:")`. 
 Spara svaret i en variabel, till exempel `let anvandarSvar = prompt(...)`.
-Använd sedan den variabeln för att sätta `textContent` på `#info-text` till exakt det som användaren skrev!
+Använd sedan den variabeln för att sätta `textContent` på `.info-text` till exakt det som användaren skrev!
 
 ### Nivå 4: bygga logik (avancerat)
 
 **Uppgift 6: dubbelkollen (if-sats)**
 Kan du använda en if-sats för att kolla vilken text som står just nu? 
 Skapa en knapp som heter "Är det farligt?" och koppla den till en funktion.
-I funktionen ska programmet titta vad som står i `#info-text`.
-
-* **Om** (`if`) texten är `"VARNING! Något gick fel!"`, ska det poppa upp en `alert("Ja, det är farligt!")`.
-* **Annars** (`else`), ska det poppa upp en `alert("Nej, kusten är klar.")`.
+I funktionen ska programmet titta vad som står i `.info-text`.
 
 *(Tips: Du kollar texten så här: `if (minText.textContent === "VARNING! Något gick fel!") { ... }`)*
 
@@ -206,8 +203,8 @@ Skapa en röd knapp som heter "HACKA SIDAN". När någon klickar på denna knapp
 
 1. Ändra sidans bakgrund till svar
 2. Ändra textfärgen (`color`) på hela `body` till neongrön (`"#39ff14"`).
-3. Byt ut rubriken `#huvudrubrik` till `"SYSTEMET ÄR ÖVERTAGET"`.
-4. Byt ut texten i `#info-text` till `"Alla dina filer är nu krypterade..."`.
+3. Byt ut rubriken `.huvudrubrik` till `"SYSTEMET ÄR ÖVERTAGET"`.
+4. Byt ut texten i `.info-text` till `"Alla dina filer är nu krypterade..."`.
 5. Om den hemliga lådan är framme, ändra texten inuti den till `"Inga hemligheter är säkra längre!"`.
 ```
 
