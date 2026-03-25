@@ -237,8 +237,8 @@ Hämta text från ett input-fält och visa den någon annanstans (repetition fr�
 
 ```javascript
 function uppdateraNamn() {
-    let namn = document.querySelector(".namn-input").value;
-    document.querySelector(".visningsnamn").textContent = namn;
+    let namn = document.querySelector(".namn-input").value
+    document.querySelector(".visningsnamn").textContent = namn
 }
 ```
 
@@ -248,15 +248,12 @@ Ta bort gamla teman och lägg till rätt klass på body (repetition från labb 4
 
 ```javascript
 function bytTema(tema) {
-    // Ta bort alla teman först
-    document.body.classList.remove("morkt-tema");
-    document.body.classList.remove("fest-tema");
-
-    // Lägg till rätt tema
+    document.body.classList.remove("morkt-tema")
+    document.body.classList.remove("fest-tema")
     if (tema == "morkt") {
-        document.body.classList.add("morkt-tema");
+        document.body.classList.add("morkt-tema")
     } else if (tema == "fest") {
-        document.body.classList.add("fest-tema");
+        document.body.classList.add("fest-tema")
     }
     // "ljust" = inga klasser = default
 }
@@ -269,54 +266,62 @@ Skriv all kod i `script.js`.
 ### Nivå 1: textuppdatering (mycket enkelt)
 
 **Uppgift 1: uppdatera namn**
-Skriv funktionen `uppdateraNamn()` enligt övning 1. När man skriver sitt namn i fältet och klickar knappen ska texten i profilkortet ändras.
+
+* Skriv funktionen `uppdateraNamn()` enligt övning 1.
+* När man skriver sitt namn i fältet och klickar knappen ska texten i profilkortet ändras.
 
 **Uppgift 2: uppdatera bio**
-Skriv funktionen `uppdateraBio()` som läser från `.bio-input` och visar texten i `.bio`.
+
+* Skriv funktionen `uppdateraBio()` som läser från `.bio-input` och visar texten i `.bio`.
 
 ### Nivå 2: färg och stil (enkelt)
 
 **Uppgift 3: byt favoritfärg**
-Skriv funktionen `bytFarg()` som läser en färg från `.farg-input` och ändrar profilkortets `backgroundColor`:
+
+* Skriv funktionen `bytFarg()` som läser en färg från `.farg-input` och ändrar profilkortets bakgrundsfärg:
 
 ```javascript
-document.querySelector(".profil-kort").style.background = farg;
+let farg = document.querySelector(".farg-input").value
+document.querySelector(".profil-kort").style.background = farg
 ```
 
 **Uppgift 4: första bokstaven i avataren**
-Bygg vidare på `uppdateraNamn()`. Förutom att uppdatera namnet, visa den första bokstaven av namnet i avataren:
+
+* Bygg vidare på `uppdateraNamn()`. Visa den första bokstaven av namnet i avataren:
 
 ```javascript
-let initial = namn[0];
-document.querySelector(".avatar").textContent = initial;
+document.querySelector(".avatar").textContent = namn[0]
 ```
 
-(Om namnet är tomt, visa `"?"` istället – det kräver en `if`/`else`!)
+* Om namnet är tomt, visa `"?"` istället – det kräver en `if`/`else`!
 
 ### Nivå 3: ålder och logik (medel)
 
 **Uppgift 5: visa ålder**
-Skriv funktionen `uppdateraAlder()` som:
 
-1. Läser `#alder-input` med `.value`.
+* Skriv funktionen `uppdateraAlder()` som:
+
+1. Läser `.alder-input` med `.value`.
 2. Omvandlar till ett tal med `Number()`.
-3. Visar åldern i `#visa-alder` med `.textContent`.
+3. Visar åldern i `.visa-alder` med `.textContent`.
 
 **Uppgift 6: vuxen eller barn?**
-Bygg vidare på `uppdateraAlder()`. Använd `if`/`else` för att lägga till rätt CSS-klass på profilkortet:
 
-- 18 år eller äldre: lägg till klassen `"vuxen"`, ta bort `"barn"`.
-- Under 18: lägg till klassen `"barn"`, ta bort `"vuxen"`.
-
-Visa även en text i `#bio` som säger `"Vuxen 🎓"` eller `"Ungdom 🌟"`.
+* Bygg vidare på `uppdateraAlder()`. Använd `if`/`else` för att lägga till rätt CSS-klass på profilkortet:
+  * 18 år eller äldre: lägg till klassen `"vuxen"`, ta bort `"barn"`.
+  * Under 18: lägg till klassen `"barn"`, ta bort `"vuxen"`.
+* Visa även en text i `.bio` som säger `"Vuxen 🎓"` eller `"Ungdom 🌟"`.
 
 ### Nivå 4: byt tema (avancerat)
 
 **Uppgift 7: tema-växlare**
-Skriv funktionen `bytTema(tema)` enligt övning 2. Den ska hantera tre teman: `"ljust"`, `"morkt"` och `"fest"`.
+
+* Skriv funktionen `bytTema(tema)` enligt övning 2.
+* Den ska hantera tre teman: `"ljust"`, `"morkt"` och `"fest"`.
 
 **Uppgift 8: gömda funktioner**
-Gör profilsidan mer dynamisk:
+
+* Gör profilsidan mer dynamisk:
 
 1. Om man skriver `"admin"` som namn, ändra bakgrundsfärgen på avataren till guld (`"gold"`).
 2. Om åldern är exakt `100`, ändra biotexten till `"Legendarisk ✨"` och gör hela profilkortet guldigt.
@@ -324,14 +329,16 @@ Gör profilsidan mer dynamisk:
 ### Nivå 5: boss-nivån
 
 **Uppgift 9: prompt-hälsning**
-Lägg till en knapp `"Hemligt meddelande"` i HTML. Skriv en funktion som:
+
+* Lägg till en knapp "Hemligt meddelande" i HTML. Skriv en funktion som:
 
 1. Använder `prompt()` för att fråga efter ett hemligt lösenord.
 2. Om lösenordet är rätt (t.ex. `"abc123"`), ändra rubrikens text till `"Välkommen tillbaka!"` och sätt fest-temat.
-3. Om det är fel, visa `alert("Fel lösenord!")`.
+3. Om det är fel, visa `alert("Fel lösenord!"`)
 
 **Uppgift 10: den kompletta profilen**
-Gör profilen till din – välj själv och bygg klart:
+
+* Gör profilen till din – välj själv och bygg klart:
 
 1. Lägg till fler fält i HTML (t.ex. stad, hobby, favorit-emoji).
 2. Varje fält ska ha en knapp som uppdaterar profilen.

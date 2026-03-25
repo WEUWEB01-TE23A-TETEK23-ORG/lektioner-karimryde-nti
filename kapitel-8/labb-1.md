@@ -114,7 +114,7 @@ För att ändra något på hela sidan pratar vi direkt med `document.body`. I HT
 // Funktionen som körs när man klickar på knappen "Ändra bakgrund"
 function andraBakgrund() {
     // Ändra bakgrundsfärgen (märk att det är camelCase, backgroundColor)
-    document.body.style.backgroundColor = "lightgreen";
+    document.body.style.backgroundColor = "lightgreen"
 }
 ```
 
@@ -125,9 +125,8 @@ Vill du ändra en rubrik eller en paragraf? Då letar du först upp den med `que
 ```javascript
 // Funktionen kopplad till knappen "Ändra rubrik"
 function andraRubrik() {
-    let minRubrik = document.querySelector(".huvudrubrik");
-    minRubrik.style.color = "red";
-    minRubrik.style.fontSize = "40px";
+    document.querySelector(".huvudrubrik").style.color = "red"
+    document.querySelector(".huvudrubrik").style.fontSize = "40px"
 }
 ```
 
@@ -138,8 +137,7 @@ I CSS kan man använda `display: none` för att ett element inte ska ta någon p
 ```javascript
 // Funktionen kopplad till knappen "Göm texten"
 function gomText() {
-    let infoText = document.querySelector(".info-text");
-    infoText.style.display = "none"; // Gömmer texten helt
+    document.querySelector(".info-text").style.display = "none" // Gömmer texten helt
 }
 ```
 
@@ -147,50 +145,53 @@ function gomText() {
 
 Skriv alla dina funktioner i `script.js`. Om du behöver nya knappar för en uppgift, lägg till dem i `index.html` inuti din `.knapp-panel` och ge dem ett `onclick`-attribut.
 
-### Nivå 1: uppvärmning (mycket enkelt)
+### Nivå 1: interaktivitet (enkelt)
 
-**Uppgift 1: gör sidan gul**
-Skapa en ny knapp i HTML som heter "Gul bakgrund" och ge den attributet `onclick="gorGul()"`. Använd JavaScript för att skapa funktionen `gorGul()` som gör sidans bakgrund gul (`"yellow"`).
+**Uppgift 1: framkalla den hemliga lådan**
 
-**Uppgift 2: färglägg informationen**
-Skapa en knapp som gör texten i paragrafen `#info-text` blå (`"blue"`) när man klickar på den. Kom ihåg att skriva en `onclick` i HTML, och sedan hämta paragrafen med `querySelector` i din nya JavaScript-funktion.
+* Det finns en div i din HTML som heter `.hemlig-lada`. Den har `display: none` från början. 
+* Skapa en knapp och en funktion som ändrar lådans display till `"block"` så att den poppar fram!
 
-### Nivå 2: interaktivitet (enkelt)
+### Nivå 2: mer styling (medel)
 
-**Uppgift 3: visa texten igen**
-I startkoden finns en knapp med attributet `onclick="visaText()"`. Skriv JavaScript-funktionen `visaText()` som gör att paragrafen `#info-text` syns igen när man klickar på knappen. (Tips: Sätt `display` till `"block"`).
+**Uppgift 2: större och fetare**
 
-**Uppgift 4: framkalla den hemliga lådan**
-Det finns en div i din HTML som heter `.hemlig-lada`. Den har `display: none` från början. Skapa en knapp och en funktion som ändrar lådans display till `"block"` så att den poppar fram!
+* Skapa en knapp som ändrar designen på den hemliga lådan. 
+* När man klickar ska lådans text bli större (`fontSize = "24px"`) och dess bakgrundsfärg ändras till `"hotpink"`.
 
-### Nivå 3: mer styling (medel)
+**Uppgift 3: händelsen onmouseenter**
 
-**Uppgift 5: större och fetare**
-Skapa en knapp som ändrar designen på den hemliga lådan. När man klickar ska lådans text bli större (`fontSize = "24px"`) och dess bakgrundsfärg ändras till `"hotpink"`.
+* Man måste inte klicka för att saker ska hända! Skapa en knapp i HTML som heter "Rör mig inte". 
+* Istället för `onclick`, använd attributet `onmouseenter="musOver()"`.
+* När muspekaren dras över knappen ska funktionen köras och sidans bakgrundsfärg bli röd.
 
-**Uppgift 6: händelsen onmouseenter**
-Man måste inte klicka för att saker ska hända! Skapa en knapp i HTML som heter "Rör mig inte". Istället för `onclick`, använd attributet `onmouseenter="musOver()"`. När muspekaren dras över knappen ska funktionen köras och sidans bakgrundsfärg bli röd.
+**Uppgift 4: händelsen onmouseleave**
 
-**Uppgift 7: händelsen onmouseleave**
-Bygg vidare på Uppgift 6. Lägg till ytterligare ett attribut på samma knapp: `onmouseleave="musUt()"`. Skapa funktionen som gör att när musen lämnar knappen så ska bakgrundsfärgen bli vit igen.
+* Bygg vidare på Uppgift 3. Lägg till ytterligare ett attribut på samma knapp: `onmouseleave="musUt()"`. 
+* Skapa funktionen som gör att när musen lämnar knappen så ska bakgrundsfärgen bli vit igen.
 
-### Nivå 4: bygga logik (avancerat)
+### Nivå 3: bygga logik (avancerat)
 
-**Uppgift 8: målarfärgen från användaren**
-Skapa en knapp som heter "Välj färg" med tillhörande funktion. När man klickar på den ska du använda `prompt("Vilken bakgrundsfärg vill du ha?")`. Spara svaret i en variabel och använd variabeln för att sätta värdet på `document.body.style.backgroundColor`. Testa att skriva in "orange" eller "purple" i rutan!
+**Uppgift 5: målarfärgen från användaren**
 
-**Uppgift 9: av/på-knappen (toggle)**
-Kan du använda *samma* knapp för att både gömma och visa den hemliga lådan? Skapa en knapp som heter "Växla låda".
-*(Tips: Använd en if-sats inuti din funktion! `if (lada.style.display === "none") { ... } else { ... }`)*
+* Skapa en knapp som heter "Välj färg" med tillhörande funktion. När man klickar på den ska du använda `prompt("Vilken bakgrundsfärg vill du ha?")`.
+* Spara svaret i en variabel och använd variabeln för att sätta värdet på `document.body.style.backgroundColor`.
+* Testa att skriva in "orange" eller "purple" i rutan!
 
-### Nivå 5: boss-nivån (hacker)
+**Uppgift 6: av/på-knappen (toggle)**
 
-**Uppgift 10: party mode!**
+* Kan du använda *samma* knapp för att både gömma och visa den hemliga lådan? 
+* Skapa en knapp som heter "Växla låda".
+* Tips: Använd en if-sats inuti din funktion!  
+  `if (document.querySelector(".hemlig-lada").style.display === "none") { ... } else { ... }`
+
+### Nivå 4: boss-nivån (hacker)
+
+**Uppgift 7: party mode!**
 Skapa en stor knapp som heter "PARTY MODE". När användaren klickar på den ska en funktion köras där flera saker händer exakt samtidigt:
 
 1. Sidans bakgrund ska bli svart.
 2. Huvudrubriken ska bli neongrön.
 3. Den hemliga lådan ska visas (om den var gömd).
 4. Knappen i sig (Party-knappen) ska försvinna från sidan (`display = "none"`), för festen går inte att stänga av!
-```
 

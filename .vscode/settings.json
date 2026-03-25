@@ -4,7 +4,15 @@
     "workbench.colorCustomizations": {
         "activityBar.background": "#3B1D61",
         "titleBar.activeBackground": "#532888",
-        "titleBar.activeForeground": "#FBF9FD"
+        "titleBar.activeForeground": "#FBF9FD",
+        "titleBar.inactiveBackground": "#3B1D61",
+        "titleBar.inactiveForeground": "#211037",
+        "statusBar.background": "#452271",
+        "statusBar.foreground": "#FCFBFE",
+        "statusBar.debuggingBackground": "#452271",
+        "statusBar.debuggingForeground": "#FCFBFE",
+        "statusBar.noFolderBackground": "#452271",
+        "statusBar.noFolderForeground": "#FCFBFE"
     },
     "editor.codeLens": false,
     "editor.multiCursorModifier": "ctrlCmd",

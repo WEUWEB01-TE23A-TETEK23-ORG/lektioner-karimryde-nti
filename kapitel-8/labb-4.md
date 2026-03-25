@@ -245,8 +245,7 @@ Med `.classList.add()` lägger vi till en CSS-klass på ett element. Det är som
 
 ```javascript
 function darkMode() {
-    // Lägg till klassen "dark" på body
-    document.body.classList.add("dark");
+    document.body.classList.add("dark")
 }
 ```
 
@@ -256,8 +255,7 @@ Med `.classList.remove()` tar vi bort klassen igen:
 
 ```javascript
 function lightMode() {
-    // Ta bort klassen "dark" från body
-    document.body.classList.remove("dark");
+    document.body.classList.remove("dark")
 }
 ```
 
@@ -267,7 +265,7 @@ Med `.classList.toggle()` slipper du skriva två funktioner. Den lägger till kl
 
 ```javascript
 function toggleDark() {
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle("dark")
 }
 ```
 
@@ -278,63 +276,76 @@ Skriv alla funktioner i `script.js`.
 ### Nivå 1: uppvärmning (mycket enkelt)
 
 **Uppgift 1: aktivera cybertema**
-Skriv funktionen `temaCyber()` som lägger till klassen `"cyber"` på body. Kopiera mönstret från övning 1.
+
+* Skriv funktionen `temaCyber()` som lägger till klassen `"cyber"` på body.
+* Kopiera mönstret från övning 1.
 
 **Uppgift 2: aktivera naturtema**
-Skriv funktionen `temaNatur()` som lägger till klassen `"natur"` på body.
+
+* Skriv funktionen `temaNatur()` som lägger till klassen `"natur"` på body.
 
 ### Nivå 2: byta mellan teman (enkelt)
 
 **Uppgift 3: rensa före byte**
-Problemet med uppgift 1–2 är att klasserna staplas! Om du klickar "Cyber" och sedan "Natur" har body *båda* klasserna. Fixa alla temafunktioner så att de först tar bort alla andra temaklasser med `classList.remove()` innan de lägger till sin. Exempel:
+
+* Problemet med uppgift 1–2 är att klasserna staplas! Om du klickar “Cyber” och sedan “Natur” har body *båda* klasserna.
+* Fixa alla temafunktioner så att de först tar bort alla andra temaklasser med `classList.remove()` innan de lägger till sin. Exempel:
 
 ```javascript
 function temaCyber() {
-    document.body.classList.remove("dark");
-    document.body.classList.remove("cyber");
-    document.body.classList.remove("natur");
-    document.body.classList.remove("retro");
-    document.body.classList.add("cyber");
+    document.body.classList.remove("dark")
+    document.body.classList.remove("cyber")
+    document.body.classList.remove("natur")
+    document.body.classList.remove("retro")
+    document.body.classList.add("cyber")
 }
 ```
 
 **Uppgift 4: retrotema**
-Skriv funktionen `temaRetro()` som (precis som uppgift 3) rensar alla teman och sedan lägger till `"retro"`.
+
+* Skriv funktionen `temaRetro()` som (precis som uppgift 3) rensar alla teman och sedan lägger till `"retro"`.
 
 ### Nivå 3: kombinera classList med text (medel)
 
 **Uppgift 5: ram runt kortet**
-Skapa en ny knapp "Gyllene ram" som växlar klassen `"ram"` på kortet (`.kort`) med `classList.toggle()`. Varje klick ska slå av eller på ramen.
+
+* Skapa en knapp "Gyllene ram" i HTML.
+* Skriv en funktion som växlar klassen `"ram"` på kortet (`.kort`) med `classList.toggle()`.
+* Varje klick ska slå av eller på ramen.
 
 **Uppgift 6: uppdatera statustext**
-Bygg vidare på temafunktionerna. Varje gång ett tema aktiveras, uppdatera `#info-text` med vilken tema som är aktivt. T.ex. `"Aktivt tema: Cyber 💜"`. (Repetition: `.textContent` från labb 2!)
+
+* Bygg vidare på temafunktionerna.
+* Varje gång ett tema aktiveras, uppdatera `.info-text` med vilket tema som är aktivt, t.ex. `"Aktivt tema: Cyber 💜"`. *(Repetition: `.textContent` från labb 2!)*
 
 ### Nivå 4: input och logik (avancerat)
 
 **Uppgift 7: välj tema med input**
-Skriv funktionen `valjTema()` som läser texten från `#tema-input` med `.value` (repetition från labb 3!). Använd `if`/`else if`/`else`:
 
-- Om texten är `"dark"` → aktivera dark mode.
-- Om texten är `"cyber"` → aktivera cybertema.
-- Om texten är `"natur"` → aktivera naturtema.
-- Om texten är `"retro"` → aktivera retrotema.
-- Annars → visa `"Okänt tema!"` i `#tema-status` och ändra dess färg till röd.
-
-*(Tips: Glöm inte att rensa alla teman först!)*
+* Skriv funktionen `valjTema()` som läser texten från `.tema-input` med `.value`. *(Repetition från labb 3!)*
+* Använd `if`/`else if`/`else`:
+  * Om texten är `"dark"` → aktivera dark mode.
+  * Om texten är `"cyber"` → aktivera cybertema.
+  * Om texten är `"natur"` → aktivera naturtema.
+  * Om texten är `"retro"` → aktivera retrotema.
+  * Annars → visa `"Okänt tema!"` i `.tema-status` och ändra dess färg till röd.
+* *(Tips: Glöm inte att rensa alla teman först!)*
 
 **Uppgift 8: markera kortet**
-Skapa en knapp "Markera". Funktionen ska:
+
+* Skapa en knapp "Markera" i HTML. Funktionen ska:
 
 1. Växla klassen `"markerad"` på kortet.
-2. Ändra texten i `#kort-text` till `"Detta kort är markerat! ⭐"` om klassen lades till, eller tillbaka till originaltexten om den togs bort.
+2. Ändra texten i `.kort-text` till `"Detta kort är markerat! ⭐"` om klassen lades till, eller tillbaka till originaltexten om den togs bort.
 
-*(Tips: Kolla aktuell text med en if-sats: `if (kortText.textContent == "Detta kort är markerat! ⭐") { ... } else { ... }`)*
+* *(Tips: `if (document.querySelector(".kort-text").textContent == "Detta kort är markerat! ⭐") { ... } else { ... }`)*
 
 ### Nivå 5: boss-nivån
 
 **Uppgift 9: din egen designpanel**
-Bygg ut sidan med en hel kontrollpanel:
 
-1. Ett input-fält där användaren skriver en ny rubrik → uppdatera `#huvudrubrik` med `.textContent`.
+* Bygg ut sidan med en hel kontrollpanel:
+
+1. Ett input-fält där användaren skriver en ny rubrik → uppdatera `.huvudrubrik` med `.textContent`.
 2. Ett input-fält för bakgrundsfärg → ändra `document.body.style.backgroundColor` direkt.
 3. En knapp som aktiverar "disco-mode": byt bakgrundsfärg, lägg till klassen `"cyber"`, ändra rubriken till `"🪩 DISCO! 🪩"` och göm alla temaknappar med `style.display = "none"`.

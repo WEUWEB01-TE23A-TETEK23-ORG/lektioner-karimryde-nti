@@ -110,7 +110,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-#hemlig-lada {
+.hemlig-lada {
     background-color: #ffcccb;
     padding: 15px;
     border-radius: 8px;
@@ -127,13 +127,8 @@ Läs igenom dessa två exempel innan du börjar med uppgifterna. Skriv gärna in
 För att byta ut texten inuti ett HTML-element (till exempel en `<p>` eller en `<h1>`) använder vi `.textContent`. Det fungerar precis som när vi ändrar `style`, men här ändrar vi själva orden.
 
 ```javascript
-// Denna funktion körs när man klickar på "Gör mig glad"-knappen
 function gorGlad() {
-    // 1. Hämta stycket där texten står
-    let minText = document.querySelector(".info-text");
-    
-    // 2. Ändra textinnehållet!
-    minText.textContent = "Idag är en helt fantastisk dag! ☀️";
+    document.querySelector(".info-text").textContent = "Idag är en helt fantastisk dag! ☀️"
 }
 ```
 
@@ -143,14 +138,9 @@ Ofta vill vi att en händelse ska göra flera saker samtidigt. Kanske både byta
 
 ```javascript
 function gorArg() {
-    let minText = document.querySelector(".info-text");
-    
-    // Ändra texten
-    minText.textContent = "NÄ NU BLIR JAG RIKTIGT ARG! 😡";
-    
-    // Ändra färgen på texten och gör den tjock
-    minText.style.color = "red";
-    minText.style.fontWeight = "bold";
+    document.querySelector(".info-text").textContent = "NÄ NU BLIR JAG RIKTIGT ARG! 😡"
+    document.querySelector(".info-text").style.color = "red"
+    document.querySelector(".info-text").style.fontWeight = "bold"
 }
 ```
 
@@ -161,20 +151,25 @@ Nu är det din tur. Skriv funktionerna i `script.js`. Om du behöver lägga till
 ### Nivå 1: grundläggande textändringar
 
 **Uppgift 1: förändra rubriken**
-Skapa en ny knapp i HTML med texten "Byt rubrik" och attributet `onclick="bytRubrik()"`. 
-I JavaScript: Skapa funktionen `bytRubrik()` och ändra texten i `.huvudrubrik` till `"Viktigt meddelande!"`.
+
+* Skapa en ny knapp i HTML med texten "Byt rubrik" och attributet `onclick="bytRubrik()"`.
+* Skapa funktionen `bytRubrik()` och ändra texten i `.huvudrubrik` till `"Viktigt meddelande!"`.
 
 **Uppgift 2: trolla fram hemligheten**
-Det finns en knapp med `onclick="visaHemlighet()"` och en låda med class `hemlig-lada` (som är dold med `display: none;`). 
-Skriv funktionen som gör att lådans display ändras till `"block"` så texten syns.
+
+* Det finns en knapp med `onclick="visaHemlighet()"` och en låda med class `hemlig-lada` (som är dold med `display: none`).
+* Skriv funktionen som gör att lådans display ändras till `"block"` så texten syns.
 
 ### Nivå 2: interaktivitet och stil
 
 **Uppgift 3: ändra knappens egen text**
-I samma funktion som du skapade i Uppgift 2 (`visaHemlighet()`), gör så att texten på *själva knappen* ändras. Hämta knappen med `querySelector(".btn-hemlig")` och ändra dess `textContent` från "Visa hemlighet" till "Hemlighet visad!".
+
+* Bygg vidare på funktionen `visaHemlighet()` från uppgift 2.
+* Hämta knappen med `querySelector(".btn-hemlig")` och ändra dess `textContent` från `"Visa hemlighet"` till `"Hemlighet visad!"`.
 
 **Uppgift 4: varningstext**
-Skapa en knapp i HTML och koppla den till en ny funktion. När funktionen körs ska:
+
+* Skapa en knapp i HTML och koppla den till en ny funktion. När funktionen körs ska:
 
 1. Texten i `.info-text` ändras till `"VARNING! Något gick fel!"`.
 2. Hela sidans bakgrundsfärg (`document.body.style.backgroundColor`) ska bli orange (`"orange"`).
@@ -182,29 +177,27 @@ Skapa en knapp i HTML och koppla den till en ny funktion. När funktionen körs 
 ### Nivå 3: användarens egna ord
 
 **Uppgift 5: din egen hälsning**
-Skapa en knapp som heter "Skriv en hälsning" och en tillhörande funktion.
-I funktionen ska du använda `prompt("Skriv en hälsning här:")`. 
-Spara svaret i en variabel, till exempel `let anvandarSvar = prompt(...)`.
-Använd sedan den variabeln för att sätta `textContent` på `.info-text` till exakt det som användaren skrev!
 
+* Skapa en knapp "Skriv en hälsning" och en tillhörande funktion.
+* Använd `prompt("Skriv en hälsning här:")` och spara svaret i `let svar = prompt(...)`.
+* Använd variabeln för att sätta `.textContent` på `.info-text` till det användaren skrev.
 ### Nivå 4: bygga logik (avancerat)
 
 **Uppgift 6: dubbelkollen (if-sats)**
-Kan du använda en if-sats för att kolla vilken text som står just nu? 
-Skapa en knapp som heter "Är det farligt?" och koppla den till en funktion.
-I funktionen ska programmet titta vad som står i `.info-text`.
 
-*(Tips: Du kollar texten så här: `if (minText.textContent === "VARNING! Något gick fel!") { ... }`)*
+* Skapa en knapp "Är det farligt?" kopplad till en funktion.
+* I funktionen, kolla vad som står i `.info-text` med en `if`-sats.
+* *(Tips: `if (document.querySelector(".info-text").textContent === "VARNING! Något gick fel!") { ... }`)*
 
 ### Nivå 5: boss-nivån
 
 **Uppgift 7: hacker-attacken**
-Skapa en röd knapp som heter "HACKA SIDAN". När någon klickar på denna knapp ska en funktion aktiveras där allt går bananas:
 
-1. Ändra sidans bakgrund till svar
-2. Ändra textfärgen (`color`) på hela `body` till neongrön (`"#39ff14"`).
-3. Byt ut rubriken `.huvudrubrik` till `"SYSTEMET ÄR ÖVERTAGET"`.
-4. Byt ut texten i `.info-text` till `"Alla dina filer är nu krypterade..."`.
+* Skapa en röd knapp "HACKA SIDAN". När knappen klickas ska:
+
+1. Sidans bakgrund ändras till svart.
+2. Textfärgen (`color`) på hela `body` bli neongrön (`"#39ff14"`).
+3. Rubriken `.huvudrubrik` bytas ut till `"SYSTEMET ÄR ÖVERTAGET"`.
+4. Texten i `.info-text` bytas ut till `"Alla dina filer är nu krypterade..."`.
 5. Om den hemliga lådan är framme, ändra texten inuti den till `"Inga hemligheter är säkra längre!"`.
-```
 

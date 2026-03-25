@@ -89,7 +89,7 @@ h1 {
     margin-bottom: 5px;
 }
 
-#info-text {
+.info-text {
     color: #aaa;
     margin-bottom: 20px;
 }
@@ -149,7 +149,7 @@ button:hover {
     margin-bottom: 30px;
 }
 
-#resultat {
+.resultat {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0;
@@ -174,15 +174,8 @@ Varje `<input>`-fält i HTML har en egenskap som heter `.value`. Den innehåller
 
 ```javascript
 function halsning() {
-    // 1. Hämta input-fältet
-    let namnFalt = document.querySelector(".namn-input");
-
-    // 2. Läs ut vad som står i fältet
-    let namn = namnFalt.value;
-
-    // 3. Visa en hälsning med textContent (repetition!)
-    let text = document.querySelector(".halsning-text");
-    text.textContent = "Hej på dig, " + namn + "! Välkommen hit!";
+    let namn = document.querySelector(".namn-input").value
+    document.querySelector(".halsning-text").textContent = "Hej på dig, " + namn + "! Välkommen hit!"
 }
 ```
 
@@ -192,19 +185,10 @@ Allt som kommer från ett input-fält är **text** (en sträng). Om du skriver `
 
 ```javascript
 function addera() {
-    // 1. Hämta värdena från input-fälten
-    let a = document.querySelector(".tal1").value;
-    let b = document.querySelector(".tal2").value;
-
-    // 2. Omvandla från text till siffror
-    let siffra1 = Number(a);
-    let siffra2 = Number(b);
-
-    // 3. Räkna ut summan
-    let summa = siffra1 + siffra2;
-
-    // 4. Visa resultatet på sidan
-    document.querySelector(".resultat").textContent = "Summan är: " + summa;
+    let siffra1 = Number(document.querySelector(".tal1").value)
+    let siffra2 = Number(document.querySelector(".tal2").value)
+    let summa = siffra1 + siffra2
+    document.querySelector(".resultat").textContent = "Summan är: " + summa
 }
 ```
 
@@ -215,52 +199,71 @@ Skriv alla funktioner i `script.js`. Startkoden har redan knappar och input-fäl
 ### Nivå 1: uppvärmning (mycket enkelt)
 
 **Uppgift 1: subtrahera**
-Skriv funktionen `subtrahera()` som läser de två talen från input-fälten, omvandlar dem med `Number()` och visar skillnaden i `#resultat`. Kopiera mönstret från övning 2 — byt bara ut `+` mot `-`.
+
+* Skriv funktionen `subtrahera()` som läser de två talen från input-fälten.
+* Omvandla dem med `Number()` och visa skillnaden i `.resultat`.
+* Kopiera mönstret från övning 2 — byt bara ut `+` mot `-`.
 
 **Uppgift 2: hälsning med stil**
-Bygg vidare på `halsning()`-funktionen. Förutom att visa hälsningen, ändra också textfärgen på `.halsning-text` till grön. (Repetition: `style.color` från labb 1–2!)
+
+* Bygg vidare på `halsning()`-funktionen.
+* Förutom att visa hälsningen, ändra textfärgen på `.halsning-text` till grön. *(Repetition: `style.color` från labb 1–2!)*
 
 ### Nivå 2: fler räknesätt (enkelt)
 
 **Uppgift 3: multiplicera**
-Skriv funktionen `multiplicera()` som visar produkten av de två talen. Multiplikationstecknet i JavaScript är `*`.
+
+* Skriv funktionen `multiplicera()` som visar produkten av de två talen.
+* Multiplikationstecknet i JavaScript är `*`.
 
 **Uppgift 4: dividera**
-Skriv funktionen `dividera()` som visar kvoten. Divisionstecknet i JavaScript är `/`.
+
+* Skriv funktionen `dividera()` som visar kvoten.
+* Divisionstecknet i JavaScript är `/`.
 
 ### Nivå 3: smartare resultat (medel)
 
 **Uppgift 5: färgkodade resultat**
-Bygg ut valfri räknefunktion så att resultat-rutan ändrar bakgrundsfärg beroende på svaret:
-- Om resultatet är positivt (större än 0): grön bakgrund.
-- Om resultatet är negativt (mindre än 0): röd bakgrund.
-- Om resultatet är exakt 0: gul bakgrund.
 
-*(Tips: `if (summa > 0) { ... } else if (summa < 0) { ... } else { ... }`)*
+* Bygg ut valfri räknefunktion så att resultat-rutan ändrar bakgrundsfärg beroende på svaret:
+  * Om resultatet är positivt (större än 0): grön bakgrund.
+  * Om resultatet är negativt (mindre än 0): röd bakgrund.
+  * Om resultatet är exakt 0: gul bakgrund.
+* *(Tips: `if (summa > 0) { ... } else if (summa < 0) { ... } else { ... }`)*
 
 **Uppgift 6: nollkontroll vid division**
-Bygg ut `dividera()` med en `if`-sats. Om det andra talet är `0`, visa texten `"Kan inte dela med noll!"` och ändra resultatfärgen till röd. Annars visa resultatet som vanligt.
+
+* Bygg ut `dividera()` med en `if`-sats.
+* Om det andra talet är `0`, visa texten `"Kan inte dela med noll!"` och ändra resultatfärgen till röd.
+* Annars visa resultatet som vanligt.
 
 ### Nivå 4: kombination (avancerat)
 
 **Uppgift 7: färgväljaren**
-Lägg till ett nytt input-fält i HTML med class `farg-input` och en ny knapp "Byt färg". Skriv en funktion som läser färgnamnet (t.ex. "purple") och ändrar hela sidans bakgrund till det. (Repetition: `document.body.style.backgroundColor` från labb 1!)
+
+* Lägg till ett nytt input-fält med class `farg-input` och en knapp "Byt färg" i HTML.
+* Skriv en funktion som läser färgnamnet (t.ex. `"purple"`) och ändrar hela sidans bakgrund. *(Repetition: `document.body.style.backgroundColor` från labb 1!)*
 
 **Uppgift 8: namnbyte på rubriken**
-Skapa en knapp "Döp om sidan". Funktionen ska använda `prompt()` för att fråga användaren om ett nytt namn och sedan uppdatera `.huvudrubrik` med svaret. (Repetition: `prompt()` och `.textContent` från labb 2!)
+
+* Skapa en knapp "Döp om sidan" i HTML.
+* Funktionen ska använda `prompt()` för att fråga användaren om ett nytt namn.
+* Uppdatera `.huvudrubrik` med svaret. *(Repetition: `prompt()` och `.textContent` från labb 2!)*
 
 ### Nivå 5: boss-nivån
 
 **Uppgift 9: temperaturomvandlaren**
-Lägg till ett nytt input-fält och en knapp "Räkna om °C → °F". Funktionen ska:
+
+* Lägg till ett nytt input-fält och en knapp "Räkna om °C → °F" i HTML. Funktionen ska:
 
 1. Läsa grader Celsius från input-fältet.
 2. Omvandla till Fahrenheit med formeln: `fahrenheit = celsius * 9 / 5 + 32`.
-3. Visa resultatet i `#resultat`, t.ex. `"25°C = 77°F"`.
+3. Visa resultatet i `.resultat`, t.ex. `"25°C = 77°F"`.
 4. Ändra bakgrundsfärg på resultat-rutan: blå om det är under 0°C, grön om 0–25°C, röd om över 25°C.
 
 **Uppgift 10: den ultimata räknaren**
-Bygg ut miniräknaren så att:
+
+* Bygg ut miniräknaren så att:
 
 1. Rubriken ändras till `"Senaste beräkningen:"` varje gång man räknar.
 2. Resultat-rutan visar hela uträkningen, t.ex. `"12 + 8 = 20"`.
