@@ -29,13 +29,13 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 </head>
 <body>
     <div class="container">
-        <h1 id="huvudrubrik">🎨 Tema-växlaren</h1>
-        <p id="info-text">Klicka på knapparna för att byta utseende!</p>
+        <h1 class="huvudrubrik">🎨 Tema-växlaren</h1>
+        <p class="info-text">Klicka på knapparna för att byta utseende!</p>
 
         <div class="kort">
             <img src="https://picsum.photos/400/200?random=1" alt="Slumpbild">
-            <h2 id="kort-rubrik">Mitt fina kort</h2>
-            <p id="kort-text">Det här kortet kan ändra utseende med classList!</p>
+            <h2 class="kort-rubrik">Mitt fina kort</h2>
+            <p class="kort-text">Det här kortet kan ändra utseende med classList!</p>
         </div>
 
         <div class="knapp-panel">
@@ -52,9 +52,9 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 
         <div class="extra-sektion">
             <h2>Välj tema med text</h2>
-            <input type="text" id="tema-input" placeholder="Skriv ett temanamn">
+            <input type="text" class="tema-input" placeholder="Skriv ett temanamn">
             <button onclick="valjTema()">Aktivera tema</button>
-            <p id="tema-status">...</p>
+            <p class="tema-status">...</p>
         </div>
     </div>
 

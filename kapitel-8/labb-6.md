@@ -32,11 +32,11 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
     <div class="container">
         <h1>Min profil</h1>
 
-        <div class="profil-kort" id="profil-kort">
-            <div class="avatar" id="avatar">?</div>
-            <h2 id="visningsnamn">Ditt namn här</h2>
-            <p id="bio">Skriv lite om dig själv...</p>
-            <p class="alder-text">Ålder: <span id="visa-alder">?</span></p>
+        <div class="profil-kort" class="profil-kort">
+            <div class="avatar" class="avatar">?</div>
+            <h2 class="visningsnamn">Ditt namn här</h2>
+            <p class="bio">Skriv lite om dig själv...</p>
+            <p class="alder-text">Ålder: <span class="visa-alder">?</span></p>
         </div>
 
         <div class="formulär">
@@ -44,25 +44,25 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 
             <div class="falt">
                 <label>Namn:</label>
-                <input type="text" id="namn-input" placeholder="Ditt namn">
+                <input type="text" class="namn-input" placeholder="Ditt namn">
                 <button onclick="uppdateraNamn()">Uppdatera namn</button>
             </div>
 
             <div class="falt">
                 <label>Bio:</label>
-                <input type="text" id="bio-input" placeholder="Beskriv dig själv">
+                <input type="text" class="bio-input" placeholder="Beskriv dig själv">
                 <button onclick="uppdateraBio()">Uppdatera bio</button>
             </div>
 
             <div class="falt">
                 <label>Ålder:</label>
-                <input type="text" id="alder-input" placeholder="Din ålder">
+                <input type="text" class="alder-input" placeholder="Din ålder">
                 <button onclick="uppdateraAlder()">Uppdatera ålder</button>
             </div>
 
             <div class="falt">
                 <label>Favorifärg:</label>
-                <input type="text" id="farg-input" placeholder="T.ex. red, blue, #ff6600">
+                <input type="text" class="farg-input" placeholder="T.ex. red, blue, #ff6600">
                 <button onclick="bytFarg()">Byt färg</button>
             </div>
 
@@ -237,8 +237,8 @@ Hämta text från ett input-fält och visa den någon annanstans (repetition fr�
 
 ```javascript
 function uppdateraNamn() {
-    let namn = document.querySelector("#namn-input").value;
-    document.querySelector("#visningsnamn").textContent = namn;
+    let namn = document.querySelector(".namn-input").value;
+    document.querySelector(".visningsnamn").textContent = namn;
 }
 ```
 
@@ -272,15 +272,15 @@ Skriv all kod i `script.js`.
 Skriv funktionen `uppdateraNamn()` enligt övning 1. När man skriver sitt namn i fältet och klickar knappen ska texten i profilkortet ändras.
 
 **Uppgift 2: uppdatera bio**
-Skriv funktionen `uppdateraBio()` som läser från `#bio-input` och visar texten i `#bio`.
+Skriv funktionen `uppdateraBio()` som läser från `.bio-input` och visar texten i `.bio`.
 
 ### Nivå 2: färg och stil (enkelt)
 
 **Uppgift 3: byt favoritfärg**
-Skriv funktionen `bytFarg()` som läser en färg från `#farg-input` och ändrar profilkortets `backgroundColor`:
+Skriv funktionen `bytFarg()` som läser en färg från `.farg-input` och ändrar profilkortets `backgroundColor`:
 
 ```javascript
-document.querySelector("#profil-kort").style.background = farg;
+document.querySelector(".profil-kort").style.background = farg;
 ```
 
 **Uppgift 4: första bokstaven i avataren**
@@ -288,7 +288,7 @@ Bygg vidare på `uppdateraNamn()`. Förutom att uppdatera namnet, visa den förs
 
 ```javascript
 let initial = namn[0];
-document.querySelector("#avatar").textContent = initial;
+document.querySelector(".avatar").textContent = initial;
 ```
 
 (Om namnet är tomt, visa `"?"` istället – det kräver en `if`/`else`!)

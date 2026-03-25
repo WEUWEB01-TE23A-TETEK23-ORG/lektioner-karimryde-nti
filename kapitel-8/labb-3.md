@@ -29,12 +29,12 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 </head>
 <body>
     <div class="container">
-        <h1 id="huvudrubrik">🔢 Miniräknaren</h1>
-        <p id="info-text">Skriv in värden och klicka för att räkna!</p>
+        <h1 class="huvudrubrik">🔢 Miniräknaren</h1>
+        <p class="info-text">Skriv in värden och klicka för att räkna!</p>
 
         <div class="input-grupp">
-            <input type="text" id="tal1" placeholder="Första talet">
-            <input type="text" id="tal2" placeholder="Andra talet">
+            <input type="text" class="tal1" placeholder="Första talet">
+            <input type="text" class="tal2" placeholder="Andra talet">
         </div>
 
         <div class="knapp-panel">
@@ -45,14 +45,14 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
         </div>
 
         <div class="resultat-ruta">
-            <p id="resultat">Resultatet visas här</p>
+            <p class="resultat">Resultatet visas här</p>
         </div>
 
         <div class="extra-sektion">
             <h2>Namnhälsaren</h2>
-            <input type="text" id="namn-input" placeholder="Skriv ditt namn">
+            <input type="text" class="namn-input" placeholder="Skriv ditt namn">
             <button onclick="halsning()">Hälsa!</button>
-            <p id="halsning-text">...</p>
+            <p class="halsning-text">...</p>
         </div>
     </div>
 
@@ -175,13 +175,13 @@ Varje `<input>`-fält i HTML har en egenskap som heter `.value`. Den innehåller
 ```javascript
 function halsning() {
     // 1. Hämta input-fältet
-    let namnFalt = document.querySelector("#namn-input");
+    let namnFalt = document.querySelector(".namn-input");
 
     // 2. Läs ut vad som står i fältet
     let namn = namnFalt.value;
 
     // 3. Visa en hälsning med textContent (repetition!)
-    let text = document.querySelector("#halsning-text");
+    let text = document.querySelector(".halsning-text");
     text.textContent = "Hej på dig, " + namn + "! Välkommen hit!";
 }
 ```
@@ -193,8 +193,8 @@ Allt som kommer från ett input-fält är **text** (en sträng). Om du skriver `
 ```javascript
 function addera() {
     // 1. Hämta värdena från input-fälten
-    let a = document.querySelector("#tal1").value;
-    let b = document.querySelector("#tal2").value;
+    let a = document.querySelector(".tal1").value;
+    let b = document.querySelector(".tal2").value;
 
     // 2. Omvandla från text till siffror
     let siffra1 = Number(a);
@@ -204,7 +204,7 @@ function addera() {
     let summa = siffra1 + siffra2;
 
     // 4. Visa resultatet på sidan
-    document.querySelector("#resultat").textContent = "Summan är: " + summa;
+    document.querySelector(".resultat").textContent = "Summan är: " + summa;
 }
 ```
 
@@ -218,7 +218,7 @@ Skriv alla funktioner i `script.js`. Startkoden har redan knappar och input-fäl
 Skriv funktionen `subtrahera()` som läser de två talen från input-fälten, omvandlar dem med `Number()` och visar skillnaden i `#resultat`. Kopiera mönstret från övning 2 — byt bara ut `+` mot `-`.
 
 **Uppgift 2: hälsning med stil**
-Bygg vidare på `halsning()`-funktionen. Förutom att visa hälsningen, ändra också textfärgen på `#halsning-text` till grön. (Repetition: `style.color` från labb 1–2!)
+Bygg vidare på `halsning()`-funktionen. Förutom att visa hälsningen, ändra också textfärgen på `.halsning-text` till grön. (Repetition: `style.color` från labb 1–2!)
 
 ### Nivå 2: fler räknesätt (enkelt)
 
@@ -244,10 +244,10 @@ Bygg ut `dividera()` med en `if`-sats. Om det andra talet är `0`, visa texten `
 ### Nivå 4: kombination (avancerat)
 
 **Uppgift 7: färgväljaren**
-Lägg till ett nytt input-fält i HTML med id `farg-input` och en ny knapp "Byt färg". Skriv en funktion som läser färgnamnet (t.ex. "purple") och ändrar hela sidans bakgrund till det. (Repetition: `document.body.style.backgroundColor` från labb 1!)
+Lägg till ett nytt input-fält i HTML med class `farg-input` och en ny knapp "Byt färg". Skriv en funktion som läser färgnamnet (t.ex. "purple") och ändrar hela sidans bakgrund till det. (Repetition: `document.body.style.backgroundColor` från labb 1!)
 
 **Uppgift 8: namnbyte på rubriken**
-Skapa en knapp "Döp om sidan". Funktionen ska använda `prompt()` för att fråga användaren om ett nytt namn och sedan uppdatera `#huvudrubrik` med svaret. (Repetition: `prompt()` och `.textContent` från labb 2!)
+Skapa en knapp "Döp om sidan". Funktionen ska använda `prompt()` för att fråga användaren om ett nytt namn och sedan uppdatera `.huvudrubrik` med svaret. (Repetition: `prompt()` och `.textContent` från labb 2!)
 
 ### Nivå 5: boss-nivån
 
@@ -265,4 +265,4 @@ Bygg ut miniräknaren så att:
 1. Rubriken ändras till `"Senaste beräkningen:"` varje gång man räknar.
 2. Resultat-rutan visar hela uträkningen, t.ex. `"12 + 8 = 20"`.
 3. Om svaret är över 100, ändra resultat-textens färg till guld (`"gold"`).
-4. Om svaret är negativt, ändra textfärgen till röd och visa texten `"⚠️ Negativt resultat!"` i `#info-text`.
+4. Om svaret är negativt, ändra textfärgen till röd och visa texten `"⚠️ Negativt resultat!"` i `.info-text`.
