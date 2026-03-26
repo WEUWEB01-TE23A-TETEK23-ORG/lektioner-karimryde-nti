@@ -1,16 +1,16 @@
-# Labb 4 – dark mode och tema-växlare
+# Labb 3 – miniräknaren
 
-Du kan nu ändra färger, byta text och läsa input. Men hittills har vi ändrat design med `style` direkt i JavaScript — en egenskap i taget. Det finns ett smidigare sätt: att växla hela CSS-klasser på en gång! Då skriver man designen i CSS och styr den med JavaScript.
+Snyggt jobbat med de första labbarna! Du kan nu ändra färger, gömma element och byta ut text med JavaScript. Men hittills har vi inte läst in något som användaren *skriver* på sidan. Det är dags att ändra på det!
 
 ## Introduktion och mål
 
-I den här labben bygger vi en sida med tema-växlare. Du kommer att träna på att:
+I den här labben bygger vi en miniräknare där användaren skriver in data direkt på sidan via `<input>`-fält. Du kommer att träna på att:
 
-* Lägga till CSS-klasser med `.classList.add()`.
-* Ta bort CSS-klasser med `.classList.remove()`.
-* Växla klasser av och på med `.classList.toggle()`.
-* Kombinera `.classList` med `.textContent` och `.value` (repetition).
-* Använda `if`/`else` för att reagera på användarens val (repetition).
+* Läsa text från ett input-fält med `.value`.
+* Omvandla text till siffror med `Number()`.
+* Visa resultat på sidan med `.textContent` (repetition).
+* Ändra stil med `.style` beroende på resultat (repetition).
+* Använda `if`/`else` för att hantera specialfall.
 
 ## Startkod för webbsidan
 
@@ -24,37 +24,35 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tema-växlaren</title>
+    <title>Miniräknaren</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="huvudrubrik">🎨 Tema-växlaren</h1>
-        <p class="info-text">Klicka på knapparna för att byta utseende!</p>
+        <h1>🔢 Miniräknaren</h1>
+        <p class="info-text">Skriv in värden och klicka för att räkna!</p>
 
-        <div class="kort">
-            <img src="https://picsum.photos/400/200?random=1" alt="Slumpbild">
-            <h2 class="kort-rubrik">Mitt fina kort</h2>
-            <p class="kort-text">Det här kortet kan ändra utseende med classList!</p>
+        <div class="input-grupp">
+            <input type="text" class="tal1" placeholder="Första talet">
+            <input type="text" class="tal2" placeholder="Andra talet">
         </div>
 
         <div class="knapp-panel">
-            <button onclick="darkMode()">🌙 Dark mode</button>
-            <button onclick="lightMode()">☀️ Light mode</button>
-            <button onclick="toggleDark()">🔄 Växla</button>
+            <button onclick="addera()">+ Addera</button>
+            <button onclick="subtrahera()">− Subtrahera</button>
+            <button onclick="multiplicera()">× Multiplicera</button>
+            <button onclick="dividera()">÷ Dividera</button>
         </div>
 
-        <div class="knapp-panel">
-            <button onclick="temaCyber()">💜 Cyber</button>
-            <button onclick="temaNatur()">🌿 Natur</button>
-            <button onclick="temaRetro()">🕹️ Retro</button>
+        <div class="resultat-ruta">
+            <p class="resultat">Resultatet visas här</p>
         </div>
 
         <div class="extra-sektion">
-            <h2>Välj tema med text</h2>
-            <input type="text" class="tema-input" placeholder="Skriv ett temanamn">
-            <button onclick="valjTema()">Aktivera tema</button>
-            <p class="tema-status">...</p>
+            <h2>Namnhälsaren</h2>
+            <input type="text" class="namn-input" placeholder="Skriv ditt namn">
+            <button onclick="halsning()">Hälsa!</button>
+            <p class="halsning-text">...</p>
         </div>
     </div>
 
@@ -68,41 +66,55 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 ```css
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #1a1a2e;
+    color: #eee;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    transition: 0.4s;
 }
 
 .container {
-    background: white;
+    background: #16213e;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     text-align: center;
     max-width: 500px;
     width: 90%;
-    transition: 0.4s;
 }
 
-.kort {
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 20px 0;
-    transition: 0.4s;
+h1 {
+    margin-bottom: 5px;
 }
 
-.kort img {
-    width: 100%;
+.info-text {
+    color: #aaa;
+    margin-bottom: 20px;
 }
 
-.kort h2, .kort p {
-    padding: 0 15px;
+.input-grupp {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 12px;
+    border: 2px solid #0f3460;
+    border-radius: 8px;
+    background: #1a1a2e;
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    width: 140px;
+}
+
+input:focus {
+    border-color: #e94560;
+    outline: none;
 }
 
 .knapp-panel {
@@ -110,14 +122,14 @@ body {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 button {
-    padding: 12px 18px;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
-    background-color: #6c757d;
+    background-color: #0f3460;
     color: white;
     cursor: pointer;
     font-weight: bold;
@@ -126,226 +138,134 @@ button {
 }
 
 button:hover {
+    background-color: #e94560;
     transform: scale(1.05);
-    background-color: #5a6268;
 }
 
-input {
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    text-align: center;
-    width: 200px;
-    margin-bottom: 10px;
+.resultat-ruta {
+    background-color: #0f3460;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.resultat {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
 }
 
 .extra-sektion {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #0f3460;
     padding-top: 20px;
-    margin-top: 10px;
 }
 
-/* ===== TEMAKLASSER ===== */
-
-/* Dark mode */
-body.dark {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-}
-
-body.dark .container {
-    background-color: #2d2d2d;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-body.dark .kort {
-    border-color: #444;
-}
-
-body.dark input {
-    background-color: #333;
-    color: white;
-    border-color: #555;
-}
-
-/* Cybertema */
-body.cyber {
-    background-color: #0a0a23;
-    color: #00ffff;
-}
-
-body.cyber .container {
-    background-color: #1a1a3e;
-    border: 1px solid #00ffff;
-}
-
-body.cyber .kort {
-    border-color: #ff00ff;
-}
-
-body.cyber button {
-    background-color: #ff00ff;
-}
-
-/* Naturtema */
-body.natur {
-    background-color: #2d5016;
-    color: #e8f5e9;
-}
-
-body.natur .container {
-    background-color: #1b5e20;
-}
-
-body.natur .kort {
-    border-color: #81c784;
-}
-
-body.natur button {
-    background-color: #4caf50;
-}
-
-/* Retrotema */
-body.retro {
-    background-color: #fff3cd;
-    color: #6d4c41;
-}
-
-body.retro .container {
-    background-color: #ffe0b2;
-    border: 3px dashed #e65100;
-}
-
-body.retro .kort {
-    border-color: #e65100;
-}
-
-body.retro button {
-    background-color: #e65100;
-}
-
-/* Ram runt kort */
-.kort.ram {
-    border: 4px solid gold;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-
-/* Markering */
-.kort.markerad {
-    background-color: #fff9c4;
+.extra-sektion input {
+    width: 200px;
+    margin-bottom: 10px;
 }
 ```
 
 ## Övningar och kodexempel
 
-### Övning 1: lägga till en klass
+### Övning 1: läsa text från ett input-fält
 
-Med `.classList.add()` lägger vi till en CSS-klass på ett element. Det är som att skriva `class="dark"` direkt i HTML — fast vi gör det med JavaScript!
+Varje `<input>`-fält i HTML har en egenskap som heter `.value`. Den innehåller det som användaren just nu har skrivit i fältet. Så här läser man ut det:
 
 ```javascript
-function darkMode() {
-    document.body.classList.add("dark")
+function halsning() {
+    let namn = document.querySelector(".namn-input").value
+    document.querySelector(".halsning-text").textContent = "Hej på dig, " + namn + "! Välkommen hit!"
 }
 ```
 
-### Övning 2: ta bort en klass
+### Övning 2: räkna med Number()
 
-Med `.classList.remove()` tar vi bort klassen igen:
+Allt som kommer från ett input-fält är **text** (en sträng). Om du skriver `"5" + "3"` får du `"53"`, inte `8`! Därför måste vi omvandla med `Number()`:
 
 ```javascript
-function lightMode() {
-    document.body.classList.remove("dark")
+function addera() {
+    let siffra1 = Number(document.querySelector(".tal1").value)
+    let siffra2 = Number(document.querySelector(".tal2").value)
+    let summa = siffra1 + siffra2
+    document.querySelector(".resultat").textContent = "Summan är: " + summa
 }
 ```
 
-### Övning 3: växla en klass av och på
+## Uppgifter – från nybörjare till matteproffs
 
-Med `.classList.toggle()` slipper du skriva två funktioner. Den lägger till klassen om den saknas, och tar bort den om den redan finns:
-
-```javascript
-function toggleDark() {
-    document.body.classList.toggle("dark")
-}
-```
-
-## Uppgifter – från nybörjare till temamästare
-
-Skriv alla funktioner i `script.js`.
+Skriv alla funktioner i `script.js`. Startkoden har redan knappar och input-fält redo att användas.
 
 ### Nivå 1: uppvärmning (mycket enkelt)
 
-**Uppgift 1: aktivera cybertema**
+**Uppgift 1: subtrahera**
 
-* Skriv funktionen `temaCyber()` som lägger till klassen `"cyber"` på body.
-* Kopiera mönstret från övning 1.
+* Skriv funktionen `subtrahera()` som läser de två talen från input-fälten.
+* Omvandla dem med `Number()` och visa skillnaden i `.resultat`.
+* Kopiera mönstret från övning 2 — byt bara ut `+` mot `-`.
 
-**Uppgift 2: aktivera naturtema**
+**Uppgift 2: hälsning med stil**
 
-* Skriv funktionen `temaNatur()` som lägger till klassen `"natur"` på body.
+* Bygg vidare på `halsning()`-funktionen.
+* Förutom att visa hälsningen, ändra textfärgen på `.halsning-text` till grön. *(Repetition: `style.color` från labb 1–2!)*
 
-### Nivå 2: byta mellan teman (enkelt)
+### Nivå 2: fler räknesätt (enkelt)
 
-**Uppgift 3: rensa före byte**
+**Uppgift 3: multiplicera**
 
-* Problemet med uppgift 1–2 är att klasserna staplas! Om du klickar “Cyber” och sedan “Natur” har body *båda* klasserna.
-* Fixa alla temafunktioner så att de först tar bort alla andra temaklasser med `classList.remove()` innan de lägger till sin. Exempel:
+* Skriv funktionen `multiplicera()` som visar produkten av de två talen.
+* Multiplikationstecknet i JavaScript är `*`.
 
-```javascript
-function temaCyber() {
-    document.body.classList.remove("dark")
-    document.body.classList.remove("cyber")
-    document.body.classList.remove("natur")
-    document.body.classList.remove("retro")
-    document.body.classList.add("cyber")
-}
-```
+**Uppgift 4: dividera**
 
-**Uppgift 4: retrotema**
+* Skriv funktionen `dividera()` som visar kvoten.
+* Divisionstecknet i JavaScript är `/`.
 
-* Skriv funktionen `temaRetro()` som (precis som uppgift 3) rensar alla teman och sedan lägger till `"retro"`.
+### Nivå 3: smartare resultat (medel)
 
-### Nivå 3: kombinera classList med text (medel)
+**Uppgift 5: färgkodade resultat**
 
-**Uppgift 5: ram runt kortet**
+* Bygg ut valfri räknefunktion så att resultat-rutan ändrar bakgrundsfärg beroende på svaret:
+  * Om resultatet är positivt (större än 0): grön bakgrund.
+  * Om resultatet är negativt (mindre än 0): röd bakgrund.
+  * Om resultatet är exakt 0: gul bakgrund.
+* *(Tips: `if (summa > 0) { ... } else if (summa < 0) { ... } else { ... }`)*
 
-* Skapa en knapp "Gyllene ram" i HTML.
-* Skriv en funktion som växlar klassen `"ram"` på kortet (`.kort`) med `classList.toggle()`.
-* Varje klick ska slå av eller på ramen.
+**Uppgift 6: nollkontroll vid division**
 
-**Uppgift 6: uppdatera statustext**
+* Bygg ut `dividera()` med en `if`-sats.
+* Om det andra talet är `0`, visa texten `"Kan inte dela med noll!"` och ändra resultatfärgen till röd.
+* Annars visa resultatet som vanligt.
 
-* Bygg vidare på temafunktionerna.
-* Varje gång ett tema aktiveras, uppdatera `.info-text` med vilket tema som är aktivt, t.ex. `"Aktivt tema: Cyber 💜"`. *(Repetition: `.textContent` från labb 2!)*
+### Nivå 4: kombination (avancerat)
 
-### Nivå 4: input och logik (avancerat)
+**Uppgift 7: färgväljaren**
 
-**Uppgift 7: välj tema med input**
+* Lägg till ett nytt input-fält med class `farg-input` och en knapp "Byt färg" i HTML.
+* Skriv en funktion som läser färgnamnet (t.ex. `"purple"`) och ändrar hela sidans bakgrund. *(Repetition: `document.body.style.backgroundColor` från labb 1!)*
 
-* Skriv funktionen `valjTema()` som läser texten från `.tema-input` med `.value`. *(Repetition från labb 3!)*
-* Använd `if`/`else if`/`else`:
-  * Om texten är `"dark"` → aktivera dark mode.
-  * Om texten är `"cyber"` → aktivera cybertema.
-  * Om texten är `"natur"` → aktivera naturtema.
-  * Om texten är `"retro"` → aktivera retrotema.
-  * Annars → visa `"Okänt tema!"` i `.tema-status` och ändra dess färg till röd.
-* *(Tips: Glöm inte att rensa alla teman först!)*
+**Uppgift 8: namnbyte på rubriken**
 
-**Uppgift 8: markera kortet**
-
-* Skapa en knapp "Markera" i HTML. Funktionen ska:
-
-1. Växla klassen `"markerad"` på kortet.
-2. Ändra texten i `.kort-text` till `"Detta kort är markerat! ⭐"` om klassen lades till, eller tillbaka till originaltexten om den togs bort.
-
-* *(Tips: `if (document.querySelector(".kort-text").textContent == "Detta kort är markerat! ⭐") { ... } else { ... }`)*
+* Skapa en knapp "Döp om sidan" i HTML.
+* Funktionen ska använda `prompt()` för att fråga användaren om ett nytt namn.
+* Uppdatera `h1` med svaret. *(Repetition: `prompt()` och `.textContent` från labb 2!)*
 
 ### Nivå 5: boss-nivån
 
-**Uppgift 9: din egen designpanel**
+**Uppgift 9: temperaturomvandlaren**
 
-* Bygg ut sidan med en hel kontrollpanel:
+* Lägg till ett nytt input-fält och en knapp "Räkna om °C → °F" i HTML. Funktionen ska:
 
-1. Ett input-fält där användaren skriver en ny rubrik → uppdatera `.huvudrubrik` med `.textContent`.
-2. Ett input-fält för bakgrundsfärg → ändra `document.body.style.backgroundColor` direkt.
-3. En knapp som aktiverar "disco-mode": byt bakgrundsfärg, lägg till klassen `"cyber"`, ändra rubriken till `"🪩 DISCO! 🪩"` och göm alla temaknappar med `style.display = "none"`.
+1. Läsa grader Celsius från input-fältet.
+2. Omvandla till Fahrenheit med formeln: `fahrenheit = celsius * 9 / 5 + 32`.
+3. Visa resultatet i `.resultat`, t.ex. `"25°C = 77°F"`.
+4. Ändra bakgrundsfärg på resultat-rutan: blå om det är under 0°C, grön om 0–25°C, röd om över 25°C.
+
+**Uppgift 10: den ultimata räknaren**
+
+* Bygg ut miniräknaren så att:
+
+1. Rubriken ändras till `"Senaste beräkningen:"` varje gång man räknar.
+2. Resultat-rutan visar hela uträkningen, t.ex. `"12 + 8 = 20"`.
+3. Om svaret är över 100, ändra resultat-textens färg till guld (`"gold"`).
+4. Om svaret är negativt, ändra textfärgen till röd och visa texten `"⚠️ Negativt resultat!"` i `.info-text`.

@@ -29,17 +29,17 @@ Börja med att skapa tre filer: `index.html`, `style.css` och `script.js`. Kopie
 </head>
 <body>
     <div class="container">
-        <h1 class="huvudrubrik">Design-kontrollrummet</h1>
+        <h1>Design-kontrollrummet</h1>
         <p class="info-text">Här styr vi webbsidans utseende med kod.</p>
         
         <div class="knapp-panel">
-            <button class="btn-bakgrund" onclick="andraBakgrund()">Ändra bakgrund</button>
-            <button class="btn-rubrik" onclick="andraRubrik()">Ändra rubrik</button>
-            <button class="btn-gom" onclick="gomText()">Göm texten</button>
-            <button class="btn-visa" onclick="visaText()">Visa texten</button>
+            <button onclick="andraBakgrund()">Ändra bakgrund</button>
+            <button onclick="andraRubrik()">Ändra rubrik</button>
+            <button onclick="gomText()">Göm texten</button>
+            <button onclick="visaText()">Visa texten</button>
             </div>
 
-        <div class="hemlig-lada" style="display: none;">
+        <div class="hemlig-lada">
             <h2>Du hittade den hemliga lådan! 🎁</h2>
             <p>Denna var osynlig från början.</p>
         </div>
@@ -94,7 +94,8 @@ button:hover {
     background-color: #0056b3;
 }
 
-#hemlig-lada {
+.hemlig-lada {
+    display: none;
     margin-top: 20px;
     padding: 15px;
     background-color: #ffde59;
@@ -125,8 +126,8 @@ Vill du ändra en rubrik eller en paragraf? Då letar du först upp den med `que
 ```javascript
 // Funktionen kopplad till knappen "Ändra rubrik"
 function andraRubrik() {
-    document.querySelector(".huvudrubrik").style.color = "red"
-    document.querySelector(".huvudrubrik").style.fontSize = "40px"
+    document.querySelector("h1").style.color = "red"
+    document.querySelector("h1").style.fontSize = "40px"
 }
 ```
 

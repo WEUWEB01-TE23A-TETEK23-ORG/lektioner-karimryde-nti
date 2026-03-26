@@ -1,17 +1,16 @@
-# Labb 6 – min profil (slutlabb)
+# Labb 5 – quizet
 
-Grattis — du har kommit till sista labben! Här bygger du en interaktiv profilsida och använder **alla** JavaScript-verktyg du lärt dig. Det är dags att visa vad du kan!
+Du har nu alla verktyg: du kan ändra färger, byta text, läsa input och växla CSS-klasser. Nu ska vi kombinera allt och bygga ett riktigt quiz! Här handlar det om logik — ditt program ska fatta beslut baserat på vad användaren svarar.
 
 ## Introduktion och mål
 
-I den här labben bygger du "Min profil" — en sida där användaren fyller i information om sig själv och sidan uppdateras i realtid. Du repeterar och kombinerar:
+I den här labben bygger vi en interaktiv frågesport. Du kommer att träna på att:
 
-* `.textContent` – ändra text (från labb 1–2).
-* `.style` – ändra färger och storlekar (från labb 1–2).
-* `.value` och `Number()` – läsa input (från labb 3).
-* `.classList` – växla klasser (från labb 4).
-* `if`/`else if`/`else` – logik och beslut (från labb 5).
-* `prompt()` – hämta information från användaren (från labb 2).
+* Använda `if`/`else if`/`else` för att jämföra svar.
+* Läsa svar från input-fält med `.value` (repetition).
+* Visa rätt/fel med `.textContent` och `.style` (repetition).
+* Växla CSS-klasser för visuell feedback med `.classList` (repetition).
+* Hålla koll på poäng med en variabel.
 
 ## Startkod för webbsidan
 
@@ -25,54 +24,48 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Min profil</title>
+    <title>Quizet</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Min profil</h1>
+        <h1>🧠 Det stora quizet</h1>
+        <p class="info-text">Svara på frågorna och se hur många poäng du får!</p>
 
-        <div class="profil-kort" class="profil-kort">
-            <div class="avatar" class="avatar">?</div>
-            <h2 class="visningsnamn">Ditt namn här</h2>
-            <p class="bio">Skriv lite om dig själv...</p>
-            <p class="alder-text">Ålder: <span class="visa-alder">?</span></p>
+        <div class="poang-ruta">
+            <p>Poäng: <span class="poang">0</span></p>
         </div>
 
-        <div class="formulär">
-            <h2>Fyll i dina uppgifter</h2>
-
-            <div class="falt">
-                <label>Namn:</label>
-                <input type="text" class="namn-input" placeholder="Ditt namn">
-                <button onclick="uppdateraNamn()">Uppdatera namn</button>
-            </div>
-
-            <div class="falt">
-                <label>Bio:</label>
-                <input type="text" class="bio-input" placeholder="Beskriv dig själv">
-                <button onclick="uppdateraBio()">Uppdatera bio</button>
-            </div>
-
-            <div class="falt">
-                <label>Ålder:</label>
-                <input type="text" class="alder-input" placeholder="Din ålder">
-                <button onclick="uppdateraAlder()">Uppdatera ålder</button>
-            </div>
-
-            <div class="falt">
-                <label>Favorifärg:</label>
-                <input type="text" class="farg-input" placeholder="T.ex. red, blue, #ff6600">
-                <button onclick="bytFarg()">Byt färg</button>
-            </div>
-
-            <div class="falt tema-knappar">
-                <label>Tema:</label>
-                <button onclick="bytTema('ljust')">☀️ Ljust</button>
-                <button onclick="bytTema('morkt')">🌙 Mörkt</button>
-                <button onclick="bytTema('fest')">🎉 Fest</button>
-            </div>
+        <div class="fraga-kort fraga1">
+            <h2>Fråga 1</h2>
+            <p>Vad heter Sveriges huvudstad?</p>
+            <input type="text" class="svar1" placeholder="Ditt svar">
+            <button onclick="kollaFraga1()">Svara</button>
+            <p class="resultat resultat1">...</p>
         </div>
+
+        <div class="fraga-kort fraga2">
+            <h2>Fråga 2</h2>
+            <p>Hur många ben har en spindel?</p>
+            <input type="text" class="svar2" placeholder="Ditt svar">
+            <button onclick="kollaFraga2()">Svara</button>
+            <p class="resultat resultat2">...</p>
+        </div>
+
+        <div class="fraga-kort fraga3">
+            <h2>Fråga 3</h2>
+            <p>Vilket år landade första människan på månen?</p>
+            <input type="text" class="svar3" placeholder="Ditt svar">
+            <button onclick="kollaFraga3()">Svara</button>
+            <p class="resultat resultat3">...</p>
+        </div>
+
+        <div class="slutresultat">
+            <h2>Resultat</h2>
+            <p class="slut-text">...</p>
+        </div>
+
+        <button class="stor-knapp" onclick="visaResultat()">Visa mitt resultat!</button>
     </div>
 
     <script src="script.js"></script>
@@ -85,86 +78,62 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 ```css
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #667eea;
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    transition: 0.5s;
 }
 
 .container {
     background: white;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    max-width: 500px;
-    width: 90%;
-    transition: 0.5s;
-}
-
-.profil-kort {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     text-align: center;
-    padding: 30px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    max-width: 550px;
+    width: 90%;
+}
+
+.poang-ruta {
+    background-color: #667eea;
     color: white;
-    margin-bottom: 30px;
-    transition: 0.5s;
-}
-
-.avatar {
-    width: 80px;
-    height: 80px;
-    background-color: rgba(255,255,255,0.3);
-    border-radius: 50%;
-    margin: 0 auto 15px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.alder-text {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-.formulär h2 {
-    margin-bottom: 15px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-block;
     font-size: 1.2rem;
-}
-
-.falt {
-    margin-bottom: 15px;
-}
-
-.falt label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: bold;
-    font-size: 0.9rem;
+    margin-bottom: 20px;
 }
 
-.falt input {
+.fraga-kort {
+    background-color: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.fraga-kort input {
     padding: 10px;
     border: 2px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
+    text-align: center;
     width: 200px;
     margin-right: 10px;
 }
 
-.falt input:focus {
+.fraga-kort input:focus {
     border-color: #667eea;
     outline: none;
 }
 
-.falt button, .tema-knappar button {
-    padding: 10px 15px;
+.fraga-kort button {
+    padding: 10px 20px;
     border: none;
     border-radius: 8px;
     background-color: #667eea;
@@ -174,174 +143,166 @@ body {
     transition: 0.2s;
 }
 
-.falt button:hover, .tema-knappar button:hover {
+.fraga-kort button:hover {
     background-color: #5a6fd6;
+}
+
+.resultat {
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 20px;
+}
+
+.stor-knapp {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.stor-knapp:hover {
+    background-color: #218838;
     transform: scale(1.05);
 }
 
-.tema-knappar button {
-    margin-right: 5px;
-    margin-top: 5px;
+.slutresultat {
+    display: none;
+    background-color: #e8f5e9;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
 }
 
-/* Tema-klasser */
-.morkt-tema {
-    background-color: #1a1a2e;
-    color: #e0e0e0;
+/* Klasser för rätt/fel */
+.ratt {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
 }
 
-.morkt-tema .container {
-    background-color: #16213e;
-    color: #e0e0e0;
-}
-
-.morkt-tema .profil-kort {
-    background: linear-gradient(135deg, #0f3460 0%, #533483 100%);
-}
-
-.fest-tema {
-    background-color: #ff6b6b;
-    color: white;
-}
-
-.fest-tema .container {
-    background-color: #feca57;
-    color: #333;
-}
-
-.fest-tema .profil-kort {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-}
-
-/* Speciell klass för vuxen/barn */
-.vuxen {
-    border: 3px solid gold;
-}
-
-.barn {
-    border: 3px solid #00cec9;
+.fel {
+    border-color: #f44336;
+    background-color: #ffebee;
 }
 ```
 
 **script.js:**
 
 ```javascript
-// Din kod börjar här!
+let poang = 0;
 ```
 
 ## Övningar och kodexempel
 
-### Övning 1: uppdatera text från input
+### Övning 1: kolla ett svar med if/else
 
-Hämta text från ett input-fält och visa den någon annanstans (repetition från labb 3):
-
-```javascript
-function uppdateraNamn() {
-    let namn = document.querySelector(".namn-input").value
-    document.querySelector(".visningsnamn").textContent = namn
-}
-```
-
-### Övning 2: byt tema med classList
-
-Ta bort gamla teman och lägg till rätt klass på body (repetition från labb 4):
+Vi läser svaret från input, jämför det med rätt svar, och visar "Rätt!" eller "Fel!":
 
 ```javascript
-function bytTema(tema) {
-    document.body.classList.remove("morkt-tema")
-    document.body.classList.remove("fest-tema")
-    if (tema == "morkt") {
-        document.body.classList.add("morkt-tema")
-    } else if (tema == "fest") {
-        document.body.classList.add("fest-tema")
+function kollaFraga1() {
+    let svar = document.querySelector(".svar1").value
+    if (svar == "Stockholm") {
+        document.querySelector(".resultat1").textContent = "Rätt! ✅"
+        document.querySelector(".resultat1").style.color = "green"
+    } else {
+        document.querySelector(".resultat1").textContent = "Fel! ❌ Rätt svar är Stockholm."
+        document.querySelector(".resultat1").style.color = "red"
     }
-    // "ljust" = inga klasser = default
 }
 ```
 
-## Uppgifter – bygg din profil steg för steg
+### Övning 2: uppdatera poäng
 
-Skriv all kod i `script.js`.
-
-### Nivå 1: textuppdatering (mycket enkelt)
-
-**Uppgift 1: uppdatera namn**
-
-* Skriv funktionen `uppdateraNamn()` enligt övning 1.
-* När man skriver sitt namn i fältet och klickar knappen ska texten i profilkortet ändras.
-
-**Uppgift 2: uppdatera bio**
-
-* Skriv funktionen `uppdateraBio()` som läser från `.bio-input` och visar texten i `.bio`.
-
-### Nivå 2: färg och stil (enkelt)
-
-**Uppgift 3: byt favoritfärg**
-
-* Skriv funktionen `bytFarg()` som läser en färg från `.farg-input` och ändrar profilkortets bakgrundsfärg:
+Vi har en variabel `poang` som börjar på 0 (se startkoden i `script.js`). Vi ökar den vid rätt svar och visar den på sidan:
 
 ```javascript
-let farg = document.querySelector(".farg-input").value
-document.querySelector(".profil-kort").style.background = farg
+// Inuti if-blocket för rätt svar, lägg till:
+poang = poang + 1
+document.querySelector(".poang").textContent = poang
 ```
 
-**Uppgift 4: första bokstaven i avataren**
+## Uppgifter – från nybörjare till quizmästare
 
-* Bygg vidare på `uppdateraNamn()`. Visa den första bokstaven av namnet i avataren:
+Skriv alla funktioner i `script.js`. Variabeln `let poang = 0;` finns redan i startkoden.
+
+### Nivå 1: uppvärmning (mycket enkelt)
+
+**Uppgift 1: svara på fråga 1**
+
+* Skriv funktionen `kollaFraga1()` enligt övning 1 ovan.
+* Rätt svar är `"Stockholm"`. Visa `"Rätt!"` i grönt eller `"Fel!"` i rött.
+
+**Uppgift 2: poäng vid rätt svar**
+
+* Bygg vidare på uppgift 1.
+* Om svaret är rätt, öka `poang` med 1 och uppdatera texten i `.poang`. *(Se övning 2.)*
+
+### Nivå 2: fler frågor (enkelt)
+
+**Uppgift 3: svara på fråga 2**
+
+* Skriv funktionen `kollaFraga2()`. Rätt svar är `"8"`.
+* Visa rätt/fel i `.resultat2` och uppdatera poängen.
+
+**Uppgift 4: svara på fråga 3**
+
+* Skriv funktionen `kollaFraga3()`. Rätt svar är `"1969"`.
+* Samma mönster som ovan.
+
+### Nivå 3: visuell feedback med classList (medel)
+
+**Uppgift 5: markera rätt/fel med klass**
+
+* Bygg vidare på alla tre frågefunktionerna.
+* Förutom att ändra texten, lägg till CSS-klassen `"ratt"` eller `"fel"` på hela frågekortet. *(Repetition: `.classList.add()` från labb 4!)*
 
 ```javascript
-document.querySelector(".avatar").textContent = namn[0]
+document.querySelector(".fraga1").classList.add("ratt")
 ```
 
-* Om namnet är tomt, visa `"?"` istället – det kräver en `if`/`else`!
+**Uppgift 6: lås frågan**
 
-### Nivå 3: ålder och logik (medel)
+* När en fråga är besvarad, göm svarsknappen så att man inte kan svara flera gånger. *(Repetition: `style.display = "none"` från labb 1!)*
 
-**Uppgift 5: visa ålder**
+### Nivå 4: slutresultat (avancerat)
 
-* Skriv funktionen `uppdateraAlder()` som:
+**Uppgift 7: visa slutresultat**
 
-1. Läser `.alder-input` med `.value`.
-2. Omvandlar till ett tal med `Number()`.
-3. Visar åldern i `.visa-alder` med `.textContent`.
+* Skriv funktionen `visaResultat()` som:
 
-**Uppgift 6: vuxen eller barn?**
+1. Visar den gömda `.slutresultat`-diven (`style.display = "block"`).
+2. Använder `if`/`else if`/`else` för att visa ett meddelande i `.slut-text`:
+   * 3 poäng: `"Perfekt! Du fick alla rätt! 🏆"`
+   * 2 poäng: `"Bra jobbat! 2 av 3 rätt! 🎉"`
+   * 1 poäng: `"Helt okej! 1 av 3 rätt. 👍"`
+   * 0 poäng: `"Nollpoängare... men övning ger färdighet! 💪"`
 
-* Bygg vidare på `uppdateraAlder()`. Använd `if`/`else` för att lägga till rätt CSS-klass på profilkortet:
-  * 18 år eller äldre: lägg till klassen `"vuxen"`, ta bort `"barn"`.
-  * Under 18: lägg till klassen `"barn"`, ta bort `"vuxen"`.
-* Visa även en text i `.bio` som säger `"Vuxen 🎓"` eller `"Ungdom 🌟"`.
+**Uppgift 8: ändra hela sidans stil baserat på resultat**
 
-### Nivå 4: byt tema (avancerat)
-
-**Uppgift 7: tema-växlare**
-
-* Skriv funktionen `bytTema(tema)` enligt övning 2.
-* Den ska hantera tre teman: `"ljust"`, `"morkt"` och `"fest"`.
-
-**Uppgift 8: gömda funktioner**
-
-* Gör profilsidan mer dynamisk:
-
-1. Om man skriver `"admin"` som namn, ändra bakgrundsfärgen på avataren till guld (`"gold"`).
-2. Om åldern är exakt `100`, ändra biotexten till `"Legendarisk ✨"` och gör hela profilkortet guldigt.
+* Bygg vidare på `visaResultat()`. Beroende på poäng, ändra `document.body.style.backgroundColor`:
+  * 3 poäng: guld (`"#ffd700"`)
+  * 2 poäng: ljusgrön (`"#90ee90"`)
+  * 1 poäng: ljusorange (`"#ffdab9"`)
+  * 0 poäng: ljusröd (`"#ffcccb"`)
 
 ### Nivå 5: boss-nivån
 
-**Uppgift 9: prompt-hälsning**
+**Uppgift 9: egen fråga**
 
-* Lägg till en knapp "Hemligt meddelande" i HTML. Skriv en funktion som:
+* Lägg till en fjärde fråga i HTML (kopiera strukturen från de andra frågorna).
+* Hitta på en egen fråga, skriv funktionen, och se till att poängen räknas med.
 
-1. Använder `prompt()` för att fråga efter ett hemligt lösenord.
-2. Om lösenordet är rätt (t.ex. `"abc123"`), ändra rubrikens text till `"Välkommen tillbaka!"` och sätt fest-temat.
-3. Om det är fel, visa `alert("Fel lösenord!"`)
+**Uppgift 10: det ultimata quizet**
 
-**Uppgift 10: den kompletta profilen**
+* Gör quizet extra snyggt:
 
-* Gör profilen till din – välj själv och bygg klart:
-
-1. Lägg till fler fält i HTML (t.ex. stad, hobby, favorit-emoji).
-2. Varje fält ska ha en knapp som uppdaterar profilen.
-3. Lägg till minst en `if`/`else if`/`else`-kedja (t.ex. olika hälsningar beroende på stad).
-4. Använd `.classList.toggle()` minst en gång (t.ex. en knapp som togglar en speciell stil).
-5. Byt minst en `.style`-egenskap baserat på input.
+1. Ändra rubriken `h1` till `"Quiz avslutat!"` när man klickar "Visa mitt resultat".
+2. Om man får alla rätt, lägg till en effekt: ändra rubrikens färg till guld och gör texten större (`fontSize = "3rem"`).
+3. Göm "Visa mitt resultat"-knappen efter den klickats (den ska bara gå att klicka en gång).
+4. Visa en personlig hälsning: använd `prompt()` för att fråga användarens namn och skriv `"Grattis [namn], du fick X poäng!"` i `.slut-text`.

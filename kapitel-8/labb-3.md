@@ -1,20 +1,19 @@
-# Labb 3 – miniräknaren
+# Labb 3 – rotera bilder och spela upp media
 
-Snyggt jobbat med de första labbarna! Du kan nu ändra färger, gömma element och byta ut text med JavaScript. Men hittills har vi inte läst in något som användaren *skriver* på sidan. Det är dags att ändra på det!
+Snyggt jobbat med de tidigare labbarna! Nu har du lärt dig att ändra färger och byta ut text på en webbsida. I den här labben ska vi göra sidan ännu roligare och mer levande. Vi ska bygga en hyllning till den klassiska humorsketschen "Ministry of silly walks" med John Cleese. 
 
 ## Introduktion och mål
 
-I den här labben bygger vi en miniräknare där användaren skriver in data direkt på sidan via `<input>`-fält. Du kommer att träna på att:
+I den här labben kommer vi att kombinera JavaScript med bilder, ljud och video. Du kommer att träna på att:
 
-* Läsa text från ett input-fält med `.value`.
-* Omvandla text till siffror med `Number()`.
-* Visa resultat på sidan med `.textContent` (repetition).
-* Ändra stil med `.style` beroende på resultat (repetition).
-* Använda `if`/`else` för att hantera specialfall.
+* Ändra en bilds rotation och utseende med CSS-egenskapen `transform`.
+* Spela upp ljudfiler genom att styra ett HTML `<audio>`-element med JavaScript.
+* Bädda in och visa en YouTube-video (en så kallad "iframe").
+* Använda variabler för att låta en bild rotera mer och mer för varje klick.
 
 ## Startkod för webbsidan
 
-Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden nedan.
+Skapa tre nya filer: `index.html`, `style.css` och `script.js`. Kopiera in koden nedan. (I HTML-koden använder vi redan en färdig bildlänk på John Cleese och ett enkelt test-ljud).
 
 **index.html:**
 
@@ -24,35 +23,27 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miniräknaren</title>
+    <title>Ministry of silly walks</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="huvudrubrik">🔢 Miniräknaren</h1>
-        <p class="info-text">Skriv in värden och klicka för att räkna!</p>
-
-        <div class="input-grupp">
-            <input type="text" class="tal1" placeholder="Första talet">
-            <input type="text" class="tal2" placeholder="Andra talet">
-        </div>
+        <h1>Ministry of silly walks</h1>
+        <p>Hjälp John Cleese att få till den perfekta, galna gångstilen!</p>
+        
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Monty_Python%27s_The_Ministry_of_Silly_Walks_video_game_cover.jpeg" alt="John Cleese gör en silly walk">
+        
+        <audio src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
 
         <div class="knapp-panel">
-            <button onclick="addera()">+ Addera</button>
-            <button onclick="subtrahera()">− Subtrahera</button>
-            <button onclick="multiplicera()">× Multiplicera</button>
-            <button onclick="dividera()">÷ Dividera</button>
+            <button onclick="roteraBild()">Rotera bilden</button>
+            <button onclick="spelaLjud()">Spela ljud</button>
+            <button onclick="visaVideo()">Visa originalklippet</button>
         </div>
 
-        <div class="resultat-ruta">
-            <p class="resultat">Resultatet visas här</p>
-        </div>
-
-        <div class="extra-sektion">
-            <h2>Namnhälsaren</h2>
-            <input type="text" class="namn-input" placeholder="Skriv ditt namn">
-            <button onclick="halsning()">Hälsa!</button>
-            <p class="halsning-text">...</p>
+        <div class="video-lada">
+            <h2>Se originalet! 🎩</h2>
+            <iframe width="100%" height="250" src="[https://www.youtube.com/embed/5ptUMe9eqYE](https://www.youtube.com/embed/5ptUMe9eqYE)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -65,9 +56,9 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 
 ```css
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1a1a2e;
-    color: #eee;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #2c3e50;
+    color: #ecf0f1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,45 +67,21 @@ body {
 }
 
 .container {
-    background: #16213e;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    background: #34495e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
     text-align: center;
     max-width: 500px;
-    width: 90%;
 }
 
-h1 {
-    margin-bottom: 5px;
-}
-
-.info-text {
-    color: #aaa;
-    margin-bottom: 20px;
-}
-
-.input-grupp {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 15px;
-}
-
-input {
-    padding: 12px;
-    border: 2px solid #0f3460;
-    border-radius: 8px;
-    background: #1a1a2e;
-    color: white;
-    font-size: 1.1rem;
-    text-align: center;
-    width: 140px;
-}
-
-input:focus {
-    border-color: #e94560;
-    outline: none;
+img {
+    width: 250px;
+    border: 5px solid #ecf0f1;
+    border-radius: 10px;
+    margin: 20px 0;
+    /* Transition gör att rotationen sker mjukt! */
+    transition: transform 0.5s ease; 
 }
 
 .knapp-panel {
@@ -126,146 +93,106 @@ input:focus {
 }
 
 button {
-    padding: 12px 20px;
+    padding: 10px 15px;
     border: none;
-    border-radius: 8px;
-    background-color: #0f3460;
+    border-radius: 5px;
+    background-color: #e74c3c;
     color: white;
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
-    transition: 0.2s;
 }
 
 button:hover {
-    background-color: #e94560;
-    transform: scale(1.05);
+    background-color: #c0392b;
 }
 
-.resultat-ruta {
-    background-color: #0f3460;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-}
-
-.resultat {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
-}
-
-.extra-sektion {
-    border-top: 1px solid #0f3460;
-    padding-top: 20px;
-}
-
-.extra-sektion input {
-    width: 200px;
-    margin-bottom: 10px;
+.video-lada {
+    display: none;
+    background-color: #2c3e50;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 ```
 
 ## Övningar och kodexempel
 
-### Övning 1: läsa text från ett input-fält
+Läs igenom dessa exempel för att förstå hur vi styr media med JavaScript. Skriv gärna in dem i din `script.js` och testa.
 
-Varje `<input>`-fält i HTML har en egenskap som heter `.value`. Den innehåller det som användaren just nu har skrivit i fältet. Så här läser man ut det:
+### Övning 1: rotera en bild med transform
+
+För att snurra en bild använder vi egenskapen `transform` i JavaScript, precis som i CSS. 
 
 ```javascript
-function halsning() {
-    let namn = document.querySelector(".namn-input").value
-    document.querySelector(".halsning-text").textContent = "Hej på dig, " + namn + "! Välkommen hit!"
+// Funktionen kopplad till knappen "Rotera bilden"
+function roteraBild() {
+    // Roterar bilden 90 grader
+    document.querySelector("img").style.transform = "rotate(90deg)"
 }
 ```
 
-### Övning 2: räkna med Number()
+### Övning 2: spela upp ett ljud
 
-Allt som kommer från ett input-fält är **text** (en sträng). Om du skriver `"5" + "3"` får du `"53"`, inte `8`! Därför måste vi omvandla med `Number()`:
+HTML-taggen `<audio>` syns inte på skärmen, men vi kan be JavaScript att starta den genom att använda metoden `.play()`.
 
 ```javascript
-function addera() {
-    let siffra1 = Number(document.querySelector(".tal1").value)
-    let siffra2 = Number(document.querySelector(".tal2").value)
-    let summa = siffra1 + siffra2
-    document.querySelector(".resultat").textContent = "Summan är: " + summa
+// Funktionen kopplad till knappen "Spela ljud"
+function spelaLjud() {
+    // Hämtar ljudelementet och spelar upp det
+    document.querySelector("audio").play()
 }
 ```
 
-## Uppgifter – från nybörjare till matteproffs
+## Uppgifter – från nybörjare till media-mästare
 
-Skriv alla funktioner i `script.js`. Startkoden har redan knappar och input-fält redo att användas.
+Dags att skriva din egen kod! Lägg all JavaScript i `script.js`. Lägg till fler knappar i `index.html` om uppgifterna ber om det.
 
-### Nivå 1: uppvärmning (mycket enkelt)
+### Nivå 1: grundläggande rotation (enkelt)
 
-**Uppgift 1: subtrahera**
+**Uppgift 1: upp och ner**
 
-* Skriv funktionen `subtrahera()` som läser de två talen från input-fälten.
-* Omvandla dem med `Number()` och visa skillnaden i `.resultat`.
-* Kopiera mönstret från övning 2 — byt bara ut `+` mot `-`.
+* Den färdiga funktionen `roteraBild()` roterar bara till 90 grader. Ändra den så att John Cleese hamnar helt upp och ner (180 grader).
 
-**Uppgift 2: hälsning med stil**
+**Uppgift 2: visa YouTube-klippet**
 
-* Bygg vidare på `halsning()`-funktionen.
-* Förutom att visa hälsningen, ändra textfärgen på `.halsning-text` till grön. *(Repetition: `style.color` från labb 1–2!)*
+* Skriv funktionen `visaVideo()` som är kopplad till knappen "Visa originalklippet".
+* Funktionen ska ändra `display` på `.video-lada` till `"block"` så att iframe-videon med Monty Python-klippet dyker upp på skärmen!
 
-### Nivå 2: fler räknesätt (enkelt)
+### Nivå 2: galnare bildhantering (medel)
 
-**Uppgift 3: multiplicera**
+**Uppgift 3: spegelvänd bilden**
 
-* Skriv funktionen `multiplicera()` som visar produkten av de två talen.
-* Multiplikationstecknet i JavaScript är `*`.
+* Skapa en ny knapp i HTML som heter "Spegelvänd". Koppla den till en ny funktion, till exempel `spegelvand()`.
+* I funktionen ska du använda `transform` för att vända på bilden horisontellt. 
+* *(Tips: Använd `style.transform = "scaleX(-1)"` för att spegelvända en bild).*
 
-**Uppgift 4: dividera**
+**Uppgift 4: byta ut bilden**
 
-* Skriv funktionen `dividera()` som visar kvoten.
-* Divisionstecknet i JavaScript är `/`.
+* Skapa en knapp som heter "Vanlig promenad".
+* Skriv en funktion som ändrar källan (`src`) på bilden så det ser ut som en vanlig gubbe. 
+* *(Tips: `document.querySelector("img").src = "länk-till-en-annan-bild.jpg"`)*
 
-### Nivå 3: smartare resultat (medel)
+### Nivå 3: bygga logik med variabler (avancerat)
 
-**Uppgift 5: färgkodade resultat**
+**Uppgift 5: snurra mer för varje klick**
 
-* Bygg ut valfri räknefunktion så att resultat-rutan ändrar bakgrundsfärg beroende på svaret:
-  * Om resultatet är positivt (större än 0): grön bakgrund.
-  * Om resultatet är negativt (mindre än 0): röd bakgrund.
-  * Om resultatet är exakt 0: gul bakgrund.
-* *(Tips: `if (summa > 0) { ... } else if (summa < 0) { ... } else { ... }`)*
+Problemet med `rotate(90deg)` är att bilden fastnar där. Om du klickar igen händer ingenting. Vi vill att den ska snurra lite till för varje klick!
 
-**Uppgift 6: nollkontroll vid division**
+* Längst upp i din `script.js` (utanför alla funktioner), skapa en variabel: `let vinkel = 0`
+* Skapa en knapp "Snurra vidare!" och en tillhörande funktion.
+* I funktionen: Öka variabeln med 45 för varje klick (`vinkel = vinkel + 45`).
+* Använd sedan variabeln i koden: `document.querySelector("img").style.transform = "rotate(" + vinkel + "deg)"`
 
-* Bygg ut `dividera()` med en `if`-sats.
-* Om det andra talet är `0`, visa texten `"Kan inte dela med noll!"` och ändra resultatfärgen till röd.
-* Annars visa resultatet som vanligt.
+### Nivå 4: boss-nivån
 
-### Nivå 4: kombination (avancerat)
+**Uppgift 6: the ultimate silly walk**
 
-**Uppgift 7: färgväljaren**
-
-* Lägg till ett nytt input-fält med class `farg-input` och en knapp "Byt färg" i HTML.
-* Skriv en funktion som läser färgnamnet (t.ex. `"purple"`) och ändrar hela sidans bakgrund. *(Repetition: `document.body.style.backgroundColor` från labb 1!)*
-
-**Uppgift 8: namnbyte på rubriken**
-
-* Skapa en knapp "Döp om sidan" i HTML.
-* Funktionen ska använda `prompt()` för att fråga användaren om ett nytt namn.
-* Uppdatera `.huvudrubrik` med svaret. *(Repetition: `prompt()` och `.textContent` från labb 2!)*
-
-### Nivå 5: boss-nivån
-
-**Uppgift 9: temperaturomvandlaren**
-
-* Lägg till ett nytt input-fält och en knapp "Räkna om °C → °F" i HTML. Funktionen ska:
-
-1. Läsa grader Celsius från input-fältet.
-2. Omvandla till Fahrenheit med formeln: `fahrenheit = celsius * 9 / 5 + 32`.
-3. Visa resultatet i `.resultat`, t.ex. `"25°C = 77°F"`.
-4. Ändra bakgrundsfärg på resultat-rutan: blå om det är under 0°C, grön om 0–25°C, röd om över 25°C.
-
-**Uppgift 10: den ultimata räknaren**
-
-* Bygg ut miniräknaren så att:
-
-1. Rubriken ändras till `"Senaste beräkningen:"` varje gång man räknar.
-2. Resultat-rutan visar hela uträkningen, t.ex. `"12 + 8 = 20"`.
-3. Om svaret är över 100, ändra resultat-textens färg till guld (`"gold"`).
-4. Om svaret är negativt, ändra textfärgen till röd och visa texten `"⚠️ Negativt resultat!"` i `.info-text`.
+* Skapa en gigantisk knapp som heter "SILLY MODE".
+* När knappen klickas ska följande hända samtidigt:
+    1. Ljudet (`audio`) ska spelas upp.
+    2. Bilden ska snurra snabbt (till exempel `rotate(720deg)` för två hela varv).
+    3. YouTube-videon ska visas.
+    4. Texten i `p` ska bytas ut till `"MINISTRY OF SILLY WALKS ÄR NU AKTIVERAT!"`.
+    5. Sidans bakgrundsfärg (`document.body.style.backgroundColor`) ska bli knallgul (`"yellow"`).
+    6. Huvudrubriken ska ändra färg till svart.

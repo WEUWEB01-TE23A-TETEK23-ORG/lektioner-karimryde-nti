@@ -28,20 +28,20 @@ Skapa tre nya filer: `index.html`, `style.css` och `script.js`. Kopiera in koden
 </head>
 <body>
     <div class="container">
-        <h1 class="huvudrubrik">Dagens meddelande</h1>
+        <h1>Dagens meddelande</h1>
         
         <div class="meddelande-ruta">
             <p class="info-text">Klicka på knapparna nedan för att ändra denna text!</p>
         </div>
         
         <div class="knapp-panel">
-            <button class="btn-glad" onclick="gorGlad()">Gör mig glad</button>
-            <button class="btn-arg" onclick="gorArg()">Gör mig arg</button>
+            <button onclick="gorGlad()">Gör mig glad</button>
+            <button onclick="gorArg()">Gör mig arg</button>
             <button class="btn-hemlig" onclick="visaHemlighet()">Visa hemlighet</button>
             </div>
 
-        <div class="hemlig-lada" style="display: none;">
-            <p class="hemlig-text">Detta är en hemlig text som ingen får se.</p>
+        <div class="hemlig-lada">
+            <p>Detta är en hemlig text som ingen får se.</p>
         </div>
     </div>
 
@@ -111,6 +111,7 @@ button:hover {
 }
 
 .hemlig-lada {
+    display: none;
     background-color: #ffcccb;
     padding: 15px;
     border-radius: 8px;
@@ -153,7 +154,7 @@ Nu är det din tur. Skriv funktionerna i `script.js`. Om du behöver lägga till
 **Uppgift 1: förändra rubriken**
 
 * Skapa en ny knapp i HTML med texten "Byt rubrik" och attributet `onclick="bytRubrik()"`.
-* Skapa funktionen `bytRubrik()` och ändra texten i `.huvudrubrik` till `"Viktigt meddelande!"`.
+* Skapa funktionen `bytRubrik()` och ändra texten i `h1` till `"Viktigt meddelande!"`.
 
 **Uppgift 2: trolla fram hemligheten**
 
@@ -197,7 +198,7 @@ Nu är det din tur. Skriv funktionerna i `script.js`. Om du behöver lägga till
 
 1. Sidans bakgrund ändras till svart.
 2. Textfärgen (`color`) på hela `body` bli neongrön (`"#39ff14"`).
-3. Rubriken `.huvudrubrik` bytas ut till `"SYSTEMET ÄR ÖVERTAGET"`.
+3. Rubriken `h1` bytas ut till `"SYSTEMET ÄR ÖVERTAGET"`.
 4. Texten i `.info-text` bytas ut till `"Alla dina filer är nu krypterade..."`.
 5. Om den hemliga lådan är framme, ändra texten inuti den till `"Inga hemligheter är säkra längre!"`.
 

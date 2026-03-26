@@ -1,16 +1,16 @@
-# Labb 5 – quizet
+# Labb 4 – dark mode och tema-växlare
 
-Du har nu alla verktyg: du kan ändra färger, byta text, läsa input och växla CSS-klasser. Nu ska vi kombinera allt och bygga ett riktigt quiz! Här handlar det om logik — ditt program ska fatta beslut baserat på vad användaren svarar.
+Du kan nu ändra färger, byta text och läsa input. Men hittills har vi ändrat design med `style` direkt i JavaScript — en egenskap i taget. Det finns ett smidigare sätt: att växla hela CSS-klasser på en gång! Då skriver man designen i CSS och styr den med JavaScript.
 
 ## Introduktion och mål
 
-I den här labben bygger vi en interaktiv frågesport. Du kommer att träna på att:
+I den här labben bygger vi en sida med tema-växlare. Du kommer att träna på att:
 
-* Använda `if`/`else if`/`else` för att jämföra svar.
-* Läsa svar från input-fält med `.value` (repetition).
-* Visa rätt/fel med `.textContent` och `.style` (repetition).
-* Växla CSS-klasser för visuell feedback med `.classList` (repetition).
-* Hålla koll på poäng med en variabel.
+* Lägga till CSS-klasser med `.classList.add()`.
+* Ta bort CSS-klasser med `.classList.remove()`.
+* Växla klasser av och på med `.classList.toggle()`.
+* Kombinera `.classList` med `.textContent` och `.value` (repetition).
+* Använda `if`/`else` för att reagera på användarens val (repetition).
 
 ## Startkod för webbsidan
 
@@ -24,48 +24,38 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizet</title>
+    <title>Tema-växlaren</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="huvudrubrik">🧠 Det stora quizet</h1>
-        <p class="info-text">Svara på frågorna och se hur många poäng du får!</p>
+        <h1>🎨 Tema-växlaren</h1>
+        <p class="info-text">Klicka på knapparna för att byta utseende!</p>
 
-        <div class="poang-ruta">
-            <p>Poäng: <span class="poang">0</span></p>
+        <div class="kort">
+            <img src="https://picsum.photos/400/200?random=1" alt="Slumpbild">
+            <h2>Mitt fina kort</h2>
+            <p>Det här kortet kan ändra utseende med classList!</p>
         </div>
 
-        <div class="fraga-kort" class="fraga1">
-            <h2>Fråga 1</h2>
-            <p>Vad heter Sveriges huvudstad?</p>
-            <input type="text" class="svar1" placeholder="Ditt svar">
-            <button onclick="kollaFraga1()">Svara</button>
-            <p class="resultat1" class="resultat">...</p>
+        <div class="knapp-panel">
+            <button onclick="darkMode()">🌙 Dark mode</button>
+            <button onclick="lightMode()">☀️ Light mode</button>
+            <button onclick="toggleDark()">🔄 Växla</button>
         </div>
 
-        <div class="fraga-kort" class="fraga2">
-            <h2>Fråga 2</h2>
-            <p>Hur många ben har en spindel?</p>
-            <input type="text" class="svar2" placeholder="Ditt svar">
-            <button onclick="kollaFraga2()">Svara</button>
-            <p class="resultat2" class="resultat">...</p>
+        <div class="knapp-panel">
+            <button onclick="temaCyber()">💜 Cyber</button>
+            <button onclick="temaNatur()">🌿 Natur</button>
+            <button onclick="temaRetro()">🕹️ Retro</button>
         </div>
 
-        <div class="fraga-kort" class="fraga3">
-            <h2>Fråga 3</h2>
-            <p>Vilket år landade första människan på månen?</p>
-            <input type="text" class="svar3" placeholder="Ditt svar">
-            <button onclick="kollaFraga3()">Svara</button>
-            <p class="resultat3" class="resultat">...</p>
+        <div class="extra-sektion">
+            <h2>Välj tema med text</h2>
+            <input type="text" class="tema-input" placeholder="Skriv ett temanamn">
+            <button onclick="valjTema()">Aktivera tema</button>
+            <p class="tema-status">...</p>
         </div>
-
-        <div class="slutresultat" style="display: none;">
-            <h2 class="slut-rubrik">Resultat</h2>
-            <p class="slut-text">...</p>
-        </div>
-
-        <button class="stor-knapp" onclick="visaResultat()">Visa mitt resultat!</button>
     </div>
 
     <script src="script.js"></script>
@@ -78,230 +68,284 @@ Skapa tre filer: `index.html`, `style.css` och `script.js`. Kopiera in koden ned
 ```css
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #667eea;
+    background-color: #f0f0f0;
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    transition: 0.4s;
 }
 
 .container {
     background: white;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     text-align: center;
-    max-width: 550px;
+    max-width: 500px;
     width: 90%;
+    transition: 0.4s;
 }
 
-.poang-ruta {
-    background-color: #667eea;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: inline-block;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.fraga-kort {
-    background-color: #f8f9fa;
-    border: 2px solid #e0e0e0;
+.kort {
+    border: 2px solid #ddd;
     border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 15px;
-    transition: 0.3s;
+    overflow: hidden;
+    margin: 20px 0;
+    transition: 0.4s;
 }
 
-.fraga-kort input {
-    padding: 10px;
+.kort img {
+    width: 100%;
+}
+
+.kort h2, .kort p {
+    padding: 0 15px;
+}
+
+.knapp-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #5a6268;
+}
+
+input {
+    padding: 12px;
     border: 2px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
     text-align: center;
     width: 200px;
-    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
-.fraga-kort input:focus {
-    border-color: #667eea;
-    outline: none;
-}
-
-.fraga-kort button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background-color: #667eea;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.fraga-kort button:hover {
-    background-color: #5a6fd6;
-}
-
-.resultat {
-    font-weight: bold;
+.extra-sektion {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
     margin-top: 10px;
-    min-height: 20px;
 }
 
-.stor-knapp {
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    background-color: #28a745;
+/* ===== TEMAKLASSER ===== */
+
+/* Dark mode */
+body.dark {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark .container {
+    background-color: #2d2d2d;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+body.dark .kort {
+    border-color: #444;
+}
+
+body.dark input {
+    background-color: #333;
     color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-top: 10px;
-    transition: 0.2s;
+    border-color: #555;
 }
 
-.stor-knapp:hover {
-    background-color: #218838;
-    transform: scale(1.05);
+/* Cybertema */
+body.cyber {
+    background-color: #0a0a23;
+    color: #00ffff;
 }
 
-.slutresultat {
-    background-color: #e8f5e9;
-    border: 2px solid #4caf50;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px 0;
+body.cyber .container {
+    background-color: #1a1a3e;
+    border: 1px solid #00ffff;
 }
 
-/* Klasser för rätt/fel */
-.ratt {
-    border-color: #4caf50;
-    background-color: #e8f5e9;
+body.cyber .kort {
+    border-color: #ff00ff;
 }
 
-.fel {
-    border-color: #f44336;
-    background-color: #ffebee;
+body.cyber button {
+    background-color: #ff00ff;
 }
-```
 
-**script.js:**
+/* Naturtema */
+body.natur {
+    background-color: #2d5016;
+    color: #e8f5e9;
+}
 
-```javascript
-let poang = 0;
+body.natur .container {
+    background-color: #1b5e20;
+}
+
+body.natur .kort {
+    border-color: #81c784;
+}
+
+body.natur button {
+    background-color: #4caf50;
+}
+
+/* Retrotema */
+body.retro {
+    background-color: #fff3cd;
+    color: #6d4c41;
+}
+
+body.retro .container {
+    background-color: #ffe0b2;
+    border: 3px dashed #e65100;
+}
+
+body.retro .kort {
+    border-color: #e65100;
+}
+
+body.retro button {
+    background-color: #e65100;
+}
+
+/* Ram runt kort */
+.kort.ram {
+    border: 4px solid gold;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Markering */
+.kort.markerad {
+    background-color: #fff9c4;
+}
 ```
 
 ## Övningar och kodexempel
 
-### Övning 1: kolla ett svar med if/else
+### Övning 1: lägga till en klass
 
-Vi läser svaret från input, jämför det med rätt svar, och visar "Rätt!" eller "Fel!":
+Med `.classList.add()` lägger vi till en CSS-klass på ett element. Det är som att skriva `class="dark"` direkt i HTML — fast vi gör det med JavaScript!
 
 ```javascript
-function kollaFraga1() {
-    let svar = document.querySelector(".svar1").value
-    if (svar == "Stockholm") {
-        document.querySelector(".resultat1").textContent = "Rätt! ✅"
-        document.querySelector(".resultat1").style.color = "green"
-    } else {
-        document.querySelector(".resultat1").textContent = "Fel! ❌ Rätt svar är Stockholm."
-        document.querySelector(".resultat1").style.color = "red"
-    }
+function darkMode() {
+    document.body.classList.add("dark")
 }
 ```
 
-### Övning 2: uppdatera poäng
+### Övning 2: ta bort en klass
 
-Vi har en variabel `poang` som börjar på 0 (se startkoden i `script.js`). Vi ökar den vid rätt svar och visar den på sidan:
+Med `.classList.remove()` tar vi bort klassen igen:
 
 ```javascript
-// Inuti if-blocket för rätt svar, lägg till:
-poang = poang + 1
-document.querySelector(".poang").textContent = poang
+function lightMode() {
+    document.body.classList.remove("dark")
+}
 ```
 
-## Uppgifter – från nybörjare till quizmästare
+### Övning 3: växla en klass av och på
 
-Skriv alla funktioner i `script.js`. Variabeln `let poang = 0;` finns redan i startkoden.
+Med `.classList.toggle()` slipper du skriva två funktioner. Den lägger till klassen om den saknas, och tar bort den om den redan finns:
+
+```javascript
+function toggleDark() {
+    document.body.classList.toggle("dark")
+}
+```
+
+## Uppgifter – från nybörjare till temamästare
+
+Skriv alla funktioner i `script.js`.
 
 ### Nivå 1: uppvärmning (mycket enkelt)
 
-**Uppgift 1: svara på fråga 1**
+**Uppgift 1: aktivera cybertema**
 
-* Skriv funktionen `kollaFraga1()` enligt övning 1 ovan.
-* Rätt svar är `"Stockholm"`. Visa `"Rätt!"` i grönt eller `"Fel!"` i rött.
+* Skriv funktionen `temaCyber()` som lägger till klassen `"cyber"` på body.
+* Kopiera mönstret från övning 1.
 
-**Uppgift 2: poäng vid rätt svar**
+**Uppgift 2: aktivera naturtema**
 
-* Bygg vidare på uppgift 1.
-* Om svaret är rätt, öka `poang` med 1 och uppdatera texten i `.poang`. *(Se övning 2.)*
+* Skriv funktionen `temaNatur()` som lägger till klassen `"natur"` på body.
 
-### Nivå 2: fler frågor (enkelt)
+### Nivå 2: byta mellan teman (enkelt)
 
-**Uppgift 3: svara på fråga 2**
+**Uppgift 3: rensa före byte**
 
-* Skriv funktionen `kollaFraga2()`. Rätt svar är `"8"`.
-* Visa rätt/fel i `.resultat2` och uppdatera poängen.
-
-**Uppgift 4: svara på fråga 3**
-
-* Skriv funktionen `kollaFraga3()`. Rätt svar är `"1969"`.
-* Samma mönster som ovan.
-
-### Nivå 3: visuell feedback med classList (medel)
-
-**Uppgift 5: markera rätt/fel med klass**
-
-* Bygg vidare på alla tre frågefunktionerna.
-* Förutom att ändra texten, lägg till CSS-klassen `"ratt"` eller `"fel"` på hela frågekortet. *(Repetition: `.classList.add()` från labb 4!)*
+* Problemet med uppgift 1–2 är att klasserna staplas! Om du klickar “Cyber” och sedan “Natur” har body *båda* klasserna.
+* Fixa alla temafunktioner så att de först tar bort alla andra temaklasser med `classList.remove()` innan de lägger till sin. Exempel:
 
 ```javascript
-document.querySelector(".fraga1").classList.add("ratt")
+function temaCyber() {
+    document.body.classList.remove("dark")
+    document.body.classList.remove("cyber")
+    document.body.classList.remove("natur")
+    document.body.classList.remove("retro")
+    document.body.classList.add("cyber")
+}
 ```
 
-**Uppgift 6: lås frågan**
+**Uppgift 4: retrotema**
 
-* När en fråga är besvarad, göm svarsknappen så att man inte kan svara flera gånger. *(Repetition: `style.display = "none"` från labb 1!)*
+* Skriv funktionen `temaRetro()` som (precis som uppgift 3) rensar alla teman och sedan lägger till `"retro"`.
 
-### Nivå 4: slutresultat (avancerat)
+### Nivå 3: kombinera classList med text (medel)
 
-**Uppgift 7: visa slutresultat**
+**Uppgift 5: ram runt kortet**
 
-* Skriv funktionen `visaResultat()` som:
+* Skapa en knapp "Gyllene ram" i HTML.
+* Skriv en funktion som växlar klassen `"ram"` på kortet (`.kort`) med `classList.toggle()`.
+* Varje klick ska slå av eller på ramen.
 
-1. Visar den gömda `.slutresultat`-diven (`style.display = "block"`).
-2. Använder `if`/`else if`/`else` för att visa ett meddelande i `.slut-text`:
-   * 3 poäng: `"Perfekt! Du fick alla rätt! 🏆"`
-   * 2 poäng: `"Bra jobbat! 2 av 3 rätt! 🎉"`
-   * 1 poäng: `"Helt okej! 1 av 3 rätt. 👍"`
-   * 0 poäng: `"Nollpoängare... men övning ger färdighet! 💪"`
+**Uppgift 6: uppdatera statustext**
 
-**Uppgift 8: ändra hela sidans stil baserat på resultat**
+* Bygg vidare på temafunktionerna.
+* Varje gång ett tema aktiveras, uppdatera `.info-text` med vilket tema som är aktivt, t.ex. `"Aktivt tema: Cyber 💜"`. *(Repetition: `.textContent` från labb 2!)*
 
-* Bygg vidare på `visaResultat()`. Beroende på poäng, ändra `document.body.style.backgroundColor`:
-  * 3 poäng: guld (`"#ffd700"`)
-  * 2 poäng: ljusgrön (`"#90ee90"`)
-  * 1 poäng: ljusorange (`"#ffdab9"`)
-  * 0 poäng: ljusröd (`"#ffcccb"`)
+### Nivå 4: input och logik (avancerat)
+
+**Uppgift 7: välj tema med input**
+
+* Skriv funktionen `valjTema()` som läser texten från `.tema-input` med `.value`. *(Repetition från labb 3!)*
+* Använd `if`/`else if`/`else`:
+  * Om texten är `"dark"` → aktivera dark mode.
+  * Om texten är `"cyber"` → aktivera cybertema.
+  * Om texten är `"natur"` → aktivera naturtema.
+  * Om texten är `"retro"` → aktivera retrotema.
+  * Annars → visa `"Okänt tema!"` i `.tema-status` och ändra dess färg till röd.
+* *(Tips: Glöm inte att rensa alla teman först!)*
+
+**Uppgift 8: markera kortet**
+
+* Skapa en knapp "Markera" i HTML. Funktionen ska:
+
+1. Växla klassen `"markerad"` på kortet.
+2. Växla texten i `.kort p` till `"Detta kort är markerat! ⭐"` om klassen lades till, eller tillbaka till originaltexten om den togs bort.
+
+* *(Tips: `if (document.querySelector(".kort p").textContent == "Detta kort är markerat! ⭐") { ... } else { ... }`)*
 
 ### Nivå 5: boss-nivån
 
-**Uppgift 9: egen fråga**
+**Uppgift 9: din egen designpanel**
 
-* Lägg till en fjärde fråga i HTML (kopiera strukturen från de andra frågorna).
-* Hitta på en egen fråga, skriv funktionen, och se till att poängen räknas med.
+* Bygg ut sidan med en hel kontrollpanel:
 
-**Uppgift 10: det ultimata quizet**
-
-* Gör quizet extra snyggt:
-
-1. Ändra rubriken `.huvudrubrik` till `"Quiz avslutat!"` när man klickar "Visa mitt resultat".
-2. Om man får alla rätt, lägg till en effekt: ändra rubrikens färg till guld och gör texten större (`fontSize = "3rem"`).
-3. Göm "Visa mitt resultat"-knappen efter den klickats (den ska bara gå att klicka en gång).
-4. Visa en personlig hälsning: använd `prompt()` för att fråga användarens namn och skriv `"Grattis [namn], du fick X poäng!"` i `.slut-text`.
+1. Ett input-fält där användaren skriver en ny rubrik → uppdatera `h1` med `.textContent`.
+2. Ett input-fält för bakgrundsfärg → ändra `document.body.style.backgroundColor` direkt.
+3. En knapp som aktiverar "disco-mode": byt bakgrundsfärg, lägg till klassen `"cyber"`, ändra rubriken till `"🪩 DISCO! 🪩"` och göm alla temaknappar med `style.display = "none"`.
