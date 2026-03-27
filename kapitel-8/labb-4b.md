@@ -1,9 +1,3 @@
-Helt rätt, vi håller det enkelt och fokuserat! Genom att skippa den extra hjälpfunktionen blir koden rakare och lättare att förstå för någon som precis börjat med JavaScript.
-
-Här är den färdiga labben, anpassad för gymnasieelever, med enbart klasser och tydliga steg-för-steg-instruktioner.
-
----
-
 # Labb 4 – den vilsna miniräknaren
 
 Glöm allt du lärt dig om logik och användarvänlighet. I den här labben ska vi bygga en miniräknare som har drabbats av en rejäl identitetskris. Den är girig, lider av social fobi och får panikångest när siffrorna blir för höga.
