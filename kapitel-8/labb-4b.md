@@ -13,8 +13,6 @@ Målet med den här labben är att bemästra hur vi kan styra webbsidans beteend
 * **Destruktiv kodning:** Radera och skriva om sidans innehåll dynamiskt.
 * **Villkorlig logik:** Använda `if` och `else` för att skapa personlighet i koden.
 
----
-
 ## Förberedelser (html & css)
 
 Innan vi börjar med logiken måste vi förbereda vår arbetsyta. Vi använder **enbart klasser** för att hitta våra element.
@@ -66,8 +64,6 @@ Lägg till dessa regler i din CSS-fil för att hantera "nervositet" och knapparn
     transition: 0.1s ease-out;
 }
 ```
-
----
 
 ## Övningar och kodexempel
 
@@ -136,8 +132,6 @@ function sjalvforstorelse() {
     document.body.style.backgroundColor = "black";
 }
 ```
-
----
 
 ## Uppgifter – från vilsen till kaotisk
 
