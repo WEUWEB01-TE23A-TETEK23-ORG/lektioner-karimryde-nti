@@ -233,7 +233,7 @@ function sjalvforstorelse() {
 }
 ```
 
-### Övning 35: Rädd för stora tal
+### Övning 5: Rädd för stora tal
 
 Här bygger vi ut din räknefunktion. Om resultatet blir för stort blir räknaren "nervös" och börjar skaka.
 
