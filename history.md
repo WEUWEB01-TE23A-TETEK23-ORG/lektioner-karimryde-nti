@@ -33,6 +33,7 @@ Här är vår gemensamma, kronologiska dagbok över allt vi har gjort under kurs
 | 2026-03-12 | Kap 8 | intro | Introduktion till JavaScript! `let`, `prompt` och `alert`. |
 | 2026-03-18 | Kap 8 | grunder / kaboom | Egendefinierade funktioner för knappar (`onclick="funktion()"`) |
 | 2026-03-19 | Kap 8 | stilar / tagg | Att byta CSS och design direkt med JS (`document.querySelector`) |
+| 2026-03-31 | Kap 8 | automation | Uppgradering av AI-modellen för automatisk dokumentation |
 
 ---
 
@@ -74,6 +75,7 @@ Här beskrivs i lite mer detalj hur vi bit för bit byggt upp vår webbutvecklin
 **Februari: Responsivitet (Mobilanpassning)**
 - **(11 feb) Responsiva makaker:** Via kommandot `@media (max-width: 768px)` sade vi åt CSS:en att blixtsnabbt avbryta och skriva över alla tidigare färg- och positionsregler sekunden som skärmen drogs ihop från datormonitor, till en liten telefonskärm. Navigeringen lade sig därmed på höjden under varandra istället för på bredden.
 
-**Mars: JavaScript (Den sista pusselbiten)**
+**Mars: JavaScript och Moderna Arbetsflöden**
 - **(12-18 mar) Hjärnan i verket / Funktioner:** Vi slutade rita mallar och började skriva rader som faktiskt *gjorde* saker (Logik). Via `prompt` fick eleverna mata in namn och värden, som vi sedan snappade upp i minnet ifrån våra metoder. Vi gav knapparna `onclick='funktion()'` och om användaren svarade fel använde vi `if / else` logik.
-- **(19 mar) Styla om sidan live:** Genom DOM-manipulering lärde vi oss att manövreringsverktyget `document.querySelector('h1')` kunde infånga vilken HTML-tagg som helst i koden, oavsett var den befann sig, och injicera in ny `.style.color` till den direkt via ett knapptryck.
+- **(19 mar) Styla om sidan live:** Genom DOM-manipulering lärde vi oss att manövreringsverktyget `document.querySelector('h1')` kunde infånga vilken HTML-tagg som helst i koden och injicera in ny `.style.color` till den direkt.
+- **(31 mar) Automation med AI:** Vi avslutade mars med att titta på hur vi kan automatisera våra projekt. Vi lärde oss att GitHub Actions kan sköta tråkiga uppgifter åt oss och hur vi enkelt kan uppgradera kraftfulla AI-modeller (som Gemini) genom att bara ändra en rad i en konfigurationsfil.
