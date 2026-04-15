@@ -34,7 +34,7 @@ Här är vår gemensamma, kronologiska dagbok över allt vi har gjort under kurs
 | 2026-03-18 | Kap 8 | grunder / kaboom | Egendefinierade funktioner för knappar (`onclick="funktion()"`) |
 | 2026-03-19 | Kap 8 | stilar / tagg | Att byta CSS och design direkt med JS (`document.querySelector`) |
 | 2026-03-31 | Kap 8 | automation | Uppgradering av AI-modellen för automatisk dokumentation |
-| 2026-04-15 | Kap 8 | automation-v2 | Miljövariabler och robustare hantering av konfiguration |
+| 2026-04-15 | Kap 8 | automation-v2 | Miljövariabler och .gitignore för renare projekt |
 
 ---
 
@@ -82,4 +82,4 @@ Här beskrivs i lite mer detalj hur vi bit för bit byggt upp vår webbutvecklin
 - **(31 mar) Automation med AI:** Vi avslutade mars med att titta på hur vi kan automatisera våra projekt. Vi lärde oss att GitHub Actions kan sköta tråkiga uppgifter åt oss och hur vi enkelt kan uppgradera kraftfulla AI-modeller (som Gemini) genom att bara ändra en rad i en konfigurationsfil.
 
 **April: Avancerad kodstruktur**
-- **(15 apr) Robustare verktyg och miljövariabler:** Vi förfinade vår dokumentationsprocess ytterligare. Genom att bygga smartare logik i Python lärde vi oss hur man använder miljövariabler för att konfigurera program utan att ändra i koden. Detta gör våra skript säkrare och mer professionella, då vi nu kan byta AI-modell utan att riskera att gå sönder koden. Vi diskuterade också vikten av att filtrera bort metadata och systemfiler för att hålla våra projekt rena.
+- **(15 apr) Robustare verktyg och projektstädning:** Vi förfinade vår dokumentationsprocess ytterligare. Genom att bygga smartare logik i Python lärde vi oss hur man använder miljövariabler för att konfigurera program utan att ändra i koden. Vi introducerade även användningen av `.gitignore` för att aktivt välja bort mappar som `.github/` från vårt git-flöde. Detta gör våra projekt säkrare, mer professionella och håller vår kodhistorik ren från onödig metadata.
