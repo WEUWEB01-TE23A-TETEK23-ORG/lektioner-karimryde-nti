@@ -34,6 +34,7 @@ Här är vår gemensamma, kronologiska dagbok över allt vi har gjort under kurs
 | 2026-03-18 | Kap 8 | grunder / kaboom | Egendefinierade funktioner för knappar (`onclick="funktion()"`) |
 | 2026-03-19 | Kap 8 | stilar / tagg | Att byta CSS och design direkt med JS (`document.querySelector`) |
 | 2026-03-31 | Kap 8 | automation | Uppgradering av AI-modellen för automatisk dokumentation |
+| 2026-04-15 | Kap 8 | automation-v2 | Robustare skriptlogik och hantering av dolda systemfiler |
 
 ---
 
@@ -79,3 +80,6 @@ Här beskrivs i lite mer detalj hur vi bit för bit byggt upp vår webbutvecklin
 - **(12-18 mar) Hjärnan i verket / Funktioner:** Vi slutade rita mallar och började skriva rader som faktiskt *gjorde* saker (Logik). Via `prompt` fick eleverna mata in namn och värden, som vi sedan snappade upp i minnet ifrån våra metoder. Vi gav knapparna `onclick='funktion()'` och om användaren svarade fel använde vi `if / else` logik.
 - **(19 mar) Styla om sidan live:** Genom DOM-manipulering lärde vi oss att manövreringsverktyget `document.querySelector('h1')` kunde infånga vilken HTML-tagg som helst i koden och injicera in ny `.style.color` till den direkt.
 - **(31 mar) Automation med AI:** Vi avslutade mars med att titta på hur vi kan automatisera våra projekt. Vi lärde oss att GitHub Actions kan sköta tråkiga uppgifter åt oss och hur vi enkelt kan uppgradera kraftfulla AI-modeller (som Gemini) genom att bara ändra en rad i en konfigurationsfil.
+
+**April: Avancerad kodstruktur**
+- **(15 apr) Robustare verktyg:** Vi förfinade vår egen dokumentationsprocess. Genom att bygga smartare logik i Python lärde vi oss hur man kan filtrera bort systemfiler och dolda mappar för att skapa renare och mer professionella projektstrukturer. Det handlade om att förstå skillnaden mellan källkod och metadata.
