@@ -16,18 +16,6 @@ Se [GEMINI.md](../GEMINI.md) för fullständiga AI-riktlinjer. Sammanfattning:
 - **Visuell feedback:** Praktiska, roliga exempel som ändrar färger, bilder och texter.
 - **Hård begränsning (kapitel 8):** Tillåtna JavaScript-koncept är *enbart* `let`, `if`/`else`, `querySelector`, `.textContent`, `.value`, `.classList`, `Number()`, `prompt()`, `alert()`, namngivna funktioner via `onclick`. Inga loopar, arrayer, objekt eller `addEventListener`.
 
-## Kursinnehåll per kapitel
-
-| Kapitel | Ämne |
-|---------|------|
-| kapitel-1 | HTML-grunder, rubriker, stycken, länkar, grundläggande CSS |
-| kapitel-2 | Bilder, `<figure>`/`<figcaption>`, layoutövningar |
-| kapitel-3 | `<div>`-boxar, CSS-klasser, flersidig navigering |
-| kapitel-4 | Flersidig webbplats, gemensam navbar, `.aktiv`-klass |
-| kapitel-6 | CSS Grid, kortmönster (`.rutnat`), komplexa layouter |
-| kapitel-7 | Holy Grail-layout, responsiv design, `fr`-enheter |
-| kapitel-8 | JavaScript-introduktion, DOM-manipulation, händelser |
-
 ## HTML-konventioner
 
 ```html
