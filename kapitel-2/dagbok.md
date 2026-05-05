@@ -1,52 +1,18 @@
-# Dagbok: Kapitel 2 – Layout-grunder och bilder
+# Dagbok - Projekt: Min reklamsida
 
-## Lektion 1: fiji-reklam (2025-09-08)
+Idag har vi fokuserat på visuell layout och hur man skapar en "Hero"-sektion (en stor välkomnande toppbild) som fångar besökarens intresse direkt.
 
-**Ämne:** Fiji-reklamsida
+### Nya begrepp och verktyg
+- **Background Image:** Att sätta bilder som bakgrund i CSS istället för att använda `<img>`-taggen.
+- **Hero-sektion:** En stor banner längst upp på en webbsida.
+- **Semantic HTML:** Användning av `<figure>` och `<figcaption>` för att gruppera bilder med tillhörande text.
 
-**Nya begrepp:**
-- `margin-left`, `margin-top` – Box-modellens yttre marginaler
-- `text-transform: uppercase` – Transformerar all text till versaler
-- `background-position` – Styr hur en bakgrundsbild placeras
-- `text-decoration: none` – Tar bort understrykningen från länkar
-- HTML-entiteter – Specialtecken, exempelvis pil (`&raquo;`)
-
-**Vad vi gjorde:**
-I den här lektionen byggde vi en annonssida för en resa till Fiji. Vi tittade på hur man centrerar en rubrik över en specifik del av bakgrunden, tog bort länkar och omvandlade dem till "knappar" visuellt.
-
-**Nyckelexempel:**
-```html
-<a href="#" class="knapp">Läs mer &raquo;</a>
-```
+### Kodexempel: Bakgrundsbild i CSS
 ```css
-a {
-    text-transform: uppercase;
-    text-decoration: none;
-    margin-top: 50px;
+.hero {
+    background-image: url('bilder/strand.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
 }
-body {
-    background-image: url('bilder/fiji.jpg');
-    background-position: center top;
-}
-```
-
----
-
-## Lektion 2: portratt (2025-09-11)
-
-**Ämne:** Porträttbilder och bildtexter
-
-**Nya begrepp:**
-- `<figure>` – Semantisk tagg som kapslar in medieinnehåll
-- `<figcaption>` – Relaterad bildtext till en `<figure>`
-
-**Vad vi gjorde:**
-Vi påbörjade en lektion om att strukturera upp bilder för ett galleri eller personporträtt med HTML-elementen `<figure>` och `<figcaption>`.
-
-**Nyckelexempel:**
-```html
-<figure>
-    <img src="bilder/profil.jpg" alt="Porträtt">
-    <figcaption>Bild över personen</figcaption>
-</figure>
 ```
