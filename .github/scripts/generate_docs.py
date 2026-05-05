@@ -1,17 +1,17 @@
 import os
 import subprocess
 import json
-import google.generativeai as genai
+from google import genai
 import datetime
 
 # Konfigurera Gemini
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     print("Inget GEMINI_API_KEY hittades. Avbryter.")
-    exit(0)
+    exit(1)
 
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+MODEL = os.getenv("GEMINI_MODEL")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 def get_git_info():
     # Hämta commit-meddelande och diff för senaste commiten
@@ -22,9 +22,10 @@ def get_git_info():
     # Identifiera vilka mappar som ändrats (ignorera rot-filer och .github-mappen)
     folders = set()
     for f in files_changed:
-        if '/' in f and not f.startswith('.github'):
+        parts = f.split('/')
+        # Ignorera filer i roten, filer i .github, och filer i mappar vars namn börjar med '.'
+        if '/' in f and not any(part.startswith('.') for part in parts[:-1]):
             folders.add(os.path.dirname(f))
-            
     return commit_msg, diff, list(folders)
 
 def read_file(path):
@@ -82,7 +83,7 @@ def main():
     """
 
     print("Skickar data till Gemini...")
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model=MODEL, contents=prompt)
     
     # Rensa bort eventuella markdown-kodblock från svaret (```json ... ```)
     response_text = response.text.strip()
