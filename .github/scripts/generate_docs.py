@@ -1,17 +1,17 @@
 import os
 import subprocess
 import json
-from google import genai
+import requests
 import datetime
 
-# Konfigurera Gemini
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    print("Inget GEMINI_API_KEY hittades. Avbryter.")
+# Konfigurera DeepSeek
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
+if not DEEPSEEK_API_KEY:
+    print("Inget DEEPSEEK_API_KEY hittades. Avbryter.")
     exit(1)
 
-MODEL = os.getenv("GEMINI_MODEL")
-client = genai.Client(api_key=GEMINI_API_KEY)
+DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
+MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-pro")
 
 def get_git_info():
     # Hämta commit-meddelande och diff för senaste commiten
@@ -38,6 +38,30 @@ def write_file(path, content):
     os.makedirs(os.path.dirname(path) if os.path.dirname(path) else '.', exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
+
+def call_deepseek(prompt):
+    """Anropa DeepSeek v4 Pro API"""
+    headers = {
+        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "model": MODEL,
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "temperature": 0.7,
+        "top_p": 0.95
+    }
+    
+    response = requests.post(DEEPSEEK_API_URL, json=payload, headers=headers)
+    response.raise_for_status()
+    
+    return response.json()["choices"][0]["message"]["content"]
 
 def main():
     commit_msg, diff, folders = get_git_info()
@@ -66,53 +90,40 @@ def main():
     Dina uppgifter för JSON-objektet som ska returneras:
     1. "dagbok_updates": En array av objekt med "folder" och "content". För varje mapp som ändrats, skriv en dagbok.md. 
        - Ton: Neutral och pedagogisk ("I den här lektionen gick vi igenom...").
-       - Innehåll: Lista nya begrepp snyggt med förklaringar (t.ex. HTML-taggar, arrayer).
-       - Exempel: Skapa korta, relevanta kodsnuttar som demonstrerar det nya (absolut INGA massiva blockdumpar av koden).
-    
-    2. "history_update": Det nya, fullständiga innehållet för history.md (i roten).
-       - Språk: Riktat direkt till gymnasieeleverna. Korrekt svenska.
-       - Struktur: Överst en snabb summeringstabell (Datum | Kapitel | Lektionsnamn). Undre sektionen ska heta "Detaljerad tidslinje" och vara en löpande, peppande berättelse månad för månad från "den allra första HTML-sidan" fram till nu. Integrera den nya lektionen smidigt i den befintliga historiken.
+       - Format: Markdown
+       - Fokus på lärande och innehål, inte tekniska detaljer
+    2. "history_update": Ett stycke som sammanfattar dagens arbete och lägger till det i history.md.
 
-    JSON-format att returnera:
-    {{
-      "dagbok_updates": [
-        {{ "folder": "mappnamn", "content": "# Dagbok\\n..." }}
-      ],
-      "history_update": "# Vår kodresa\\n..."
-    }}
+    Här är mapparna som ändrats: {', '.join(folders)}
+
+    Returnera ENDAST JSON utan formatering runtom.
     """
 
-    print("Skickar data till Gemini...")
-    response = client.models.generate_content(model=MODEL, contents=prompt)
-    
-    # Rensa bort eventuella markdown-kodblock från svaret (```json ... ```)
-    response_text = response.text.strip()
-    if response_text.startswith("```json"):
-        response_text = response_text[7:]
-    if response_text.startswith("```"):
-        response_text = response_text[3:]
-    if response_text.endswith("```"):
-        response_text = response_text[:-3]
-
     try:
-        data = json.loads(response_text)
+        response = call_deepseek(prompt)
+        result = json.loads(response)
         
-        # Spara dagböcker
-        for update in data.get("dagbok_updates", []):
-            folder = update.get("folder")
-            if folder in folders: # Verifiera att det är en ändrad mapp
-                dagbok_path = os.path.join(folder, 'dagbok.md')
-                write_file(dagbok_path, update.get("content"))
-                print(f"Uppdaterade {dagbok_path}")
-
-        # Spara history.md
-        if data.get("history_update"):
-            write_file("history.md", data.get("history_update"))
-            print("Uppdaterade history.md")
-
+        # Uppdatera dagböcker
+        for update in result.get("dagbok_updates", []):
+            dagbok_path = f"{update['folder']}/dagbok.md"
+            write_file(dagbok_path, update["content"])
+            print(f"✓ Uppdaterad: {dagbok_path}")
+        
+        # Uppdatera history.md
+        if result.get("history_update"):
+            new_history = history_content + f"\n\n## {today}\n{result['history_update']}"
+            write_file('history.md', new_history)
+            print("✓ Uppdaterad: history.md")
+        
+        print("Dokumentation genererad med DeepSeek v4 Pro!")
+    
     except json.JSONDecodeError as e:
-        print("Kunde inte tolka svaret från Gemini som JSON.")
-        print("Svar var:", response.text)
+        print(f"Fel vid JSON-tolkning: {e}")
+        print(f"Svar från DeepSeek: {response}")
+        exit(1)
+    except requests.exceptions.RequestException as e:
+        print(f"Fel vid anrop till DeepSeek API: {e}")
+        exit(1)
 
 if __name__ == "__main__":
     main()
